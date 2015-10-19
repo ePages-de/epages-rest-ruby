@@ -24,20 +24,20 @@ module Epages
     GatewayTimeout =      Class.new(ServerError)
 
     ERRORS = {
-        400 => Epages::Error::BadRequest,
-        401 => Epages::Error::Unauthorized,
-        403 => Epages::Error::Forbidden,
-        404 => Epages::Error::NotFound,
-        406 => Epages::Error::NotAcceptable,
-        422 => Epages::Error::UnprocessableEntity,
-        429 => Epages::Error::TooManyRequests,
-        500 => Epages::Error::InternalServerError,
-        502 => Epages::Error::BadGateway,
-        503 => Epages::Error::ServiceUnavailable,
-        504 => Epages::Error::GatewayTimeout,
+      400 => Epages::Error::BadRequest,
+      401 => Epages::Error::Unauthorized,
+      403 => Epages::Error::Forbidden,
+      404 => Epages::Error::NotFound,
+      406 => Epages::Error::NotAcceptable,
+      422 => Epages::Error::UnprocessableEntity,
+      429 => Epages::Error::TooManyRequests,
+      500 => Epages::Error::InternalServerError,
+      502 => Epages::Error::BadGateway,
+      503 => Epages::Error::ServiceUnavailable,
+      504 => Epages::Error::GatewayTimeout,
     }
 
-    private
+  private
 
     def parse_error(body)
       if body.nil? || body.empty?

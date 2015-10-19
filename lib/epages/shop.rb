@@ -1,11 +1,11 @@
-require "epages/error"
+require 'epages/error'
 
 module Epages
   class Shop
-    attr_accessor :api_url, :token
+    attr_accessor :name, :token
 
     def initialize(name, token = nil)
-      @api_url = BASE_URI + name
+      @name = name
       @token = token
     end
 

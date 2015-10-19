@@ -10,14 +10,14 @@ module Epages
 
       def initialize(shop, request_method, path, options = {})
         @shop = shop
-        @uri = URI.parse(path.start_with?('http') ? path : BASE_URL + path)
+        @uri = URI.parse(BASE_URL + @shop.name + path)
         @path = uri.path
         set_options(request_method, options)
       end
 
       def set_options(method, options)
         @options = options
-        @request_method = request_method
+        @request_method = method
         @headers = request_headers
       end
 
@@ -29,15 +29,13 @@ module Epages
       def perform
         options_key = @request_method == :get ? :params : :form
         response = HTTP.with(@headers).public_send(@request_method, @uri.to_s, options_key => @options)
-        response_body = symbolize_keys!(response.parse)
-        response_headers = response.headers
-        fail_or_return_response_body(response.code, response_body, response_headers)
+        fail_or_return_response_body(response)
       end
 
       def request_headers
         headers = {}
         headers['Content-Type']  = 'application/json'
-        headers['Accept']        = 'application/vnd.epages.mate.v1+json'
+        headers['Accept']        = '*/*'
         headers['Authorization'] = auth_token if @shop.token_request?
         headers
       end
@@ -55,10 +53,13 @@ module Epages
         object
       end
 
-      def fail_or_return_response_body(code, body, headers)
-        error = error(code, body, headers)
-        fail(error) if error
-        body
+      def fail_or_return_response_body(response)
+        if response.code == 200
+          symbolize_keys!(response.parse)
+        else
+          error = Epages::Error::ERRORS[response.code]
+          fail(error)
+        end
       end
     end
   end

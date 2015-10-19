@@ -5,13 +5,13 @@ require 'epages/version'
 
 Gem::Specification.new do |spec|
   spec.version       = Epages::VERSION
-  spec.name          = "epages"
-  spec.authors       = ["Domingo Cividanes"]
-  spec.email         = ["dcividanes91@gmail.com"]
-  spec.description   = "A Ruby interface to the Epages Rest API."
+  spec.name          = 'epages'
+  spec.authors       = ['Domingo Cividanes']
+  spec.email         = ['dcividanes91@gmail.com']
+  spec.description   = 'A Ruby interface to the Epages Rest API.'
   spec.summary       = spec.description
   spec.homepage      = "TODO: Put your gem's website or public repo URL here."
-  spec.license       = "MIT"
+  spec.license       = 'MIT'
 
   spec.require_paths = %w(lib)
   spec.files         = %w(LICENSE.txt README.md epages.gemspec) + Dir['lib/**/*.rb']

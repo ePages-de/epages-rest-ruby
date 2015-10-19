@@ -54,6 +54,32 @@ module Epages
           klass.new(element)
         end
       end
+
+      # @param path [String]
+      # @param options [Hash]
+      # @param key [Symbol]
+      # @param klass [Class]
+      def perform_get_with_key_and_objects(path, options, key, klass)
+        perform_request_with_key_and_objects(:get, path, options, key, klass)
+      end
+
+      # @param path [String]
+      # @param options [Hash]
+      # @param key [Symbol]
+      # @param klass [Class]
+      def perform_post_with_key_and_objects(path, options, key, klass)
+        perform_request_with_key_and_objects(:post, path, options, key, klass)
+      end
+
+      # @param path [String]
+      # @param options [Hash]
+      # @param key [Symbol]
+      # @param klass [Class]
+      def perform_request_with_key_and_objects(request_method, path, options, key, klass)
+        perform_request(request_method, path, options)[key].collect do |element|
+          klass.new(element)
+        end
+      end
     end
   end
 end

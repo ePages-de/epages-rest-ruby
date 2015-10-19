@@ -7,8 +7,8 @@ module Epages
     module Products
       include REST::Utils
 
-      def products
-        perform_get_with_object('products', options, Epages::Product)
+      def products(options = {})
+        perform_get_with_key_and_objects('/products', options, :items, Epages::Product)
       end
     end
   end

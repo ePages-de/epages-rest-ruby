@@ -1,3 +1,4 @@
-require "epages/version"
-require "epages/shop"
-require "epages/rest/shop"
+require 'epages/version'
+require 'epages/shop'
+require 'epages/product'
+require 'epages/rest/shop'
