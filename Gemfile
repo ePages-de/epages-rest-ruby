@@ -11,8 +11,8 @@ end
 group :test do
   gem 'coveralls'
   gem 'rspec', '>= 2.14'
-  gem 'rubocop', '>= 0.27'
   gem 'simplecov', '>= 0.9'
+  gem 'rubocop'
   gem 'timecop'
   gem 'webmock'
   gem 'yardstick'

@@ -57,8 +57,7 @@ module Epages
         if response.code == 200
           symbolize_keys!(response.parse)
         else
-          error = Epages::Error::ERRORS[response.code]
-          fail(error)
+          fail Epages::Error::ERRORS[response.code]
         end
       end
     end

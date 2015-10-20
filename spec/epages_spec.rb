@@ -56,10 +56,10 @@ describe Epages do
   end
 
   it 'shops receives 200, with or without token for public calls' do
-    good_shop = Epages::REST::Shop.new('domingo', 'token')
-    fail_shop = Epages::REST::Shop.new('domingo')
+    token_shop = Epages::REST::Shop.new('domingo', 'token').products
+    no_token_shop = Epages::REST::Shop.new('domingo').products
 
-    expect(good_shop.products).to be_instance_of Array
-    expect(fail_shop.products).to be_instance_of Array
+    expect(token_shop).to be_instance_of Array
+    expect(no_token_shop).to be_instance_of Array
   end
 end

@@ -6,12 +6,12 @@ require 'epages/price_info'
 
 module Epages
   class Product
-  	include Epages::Utils
+    include Epages::Utils
 
-    attr_accessor :name, :short_description, :description, :images, :priceInfo,
-                  :forSale, :specialOffer, :deliveryWeight, :shippingMethodsRestrictedTo,
-                  :availabilityText, :availability, :energyLabelsString, :energyLabelSourceFile,
-                  :productDataSheet, :sfUrl, :productNumber, :manufacturer, :upc, :ean, :links
+    attr_accessor :product_id, :name, :short_description, :description, :images, :price_info,
+                  :for_sale, :special_offer, :delivery_weight, :shipping_methods_restricted_to,
+                  :availability_text, :availability, :energy_labels_string, :energy_label_source_file,
+                  :product_data_sheet, :sf_url, :product_number, :manufacturer, :upc, :ean, :links
 
     def initialize(data)
       @images = data.delete(:images).collect { |i| Epages::Image.new(i) }
