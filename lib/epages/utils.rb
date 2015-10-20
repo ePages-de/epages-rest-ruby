@@ -1,4 +1,5 @@
 require 'active_support/inflector'
+require 'pry'
 
 module Epages
   module Utils
@@ -27,6 +28,19 @@ module Epages
         value = klass.nil? ? data[key.to_sym] : klass.new(data[key.to_sym])
         instance_variable_set("@#{key.to_s.underscore}", value)
       end
+    end
+
+    # in order to work with camelcase or underscore-case indistinctly
+    # return the hash with the keys converted to lower camelcase (the API works with camelcase)
+    #
+    # @param data [Hash]
+    def camelize_keys(hash)
+      hash.keys.each do |k|
+        key = k.to_s.camelize(:lower).to_sym
+        hash[key] = hash[k]
+        hash.delete(k) if key != k
+      end
+      hash
     end
   end
 end

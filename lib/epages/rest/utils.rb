@@ -80,6 +80,12 @@ module Epages
           klass.new(element)
         end
       end
+
+      def object_id(object)
+        return object if object.class == String
+        id = object.class.name.demodulize.downcase + '_id'
+        object.send(id)
+      end
     end
   end
 end

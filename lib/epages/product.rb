@@ -19,5 +19,12 @@ module Epages
       parse_attribute_as(:priceInfo, data.delete(:priceInfo), Epages::PriceInfo)
       parse_attributes(data)
     end
+
+    def ==(product)
+      return false if product.class != Epages::Product
+      product_id == product.product_id &&
+        name == product.name &&
+        product_number == product.product_number
+    end
   end
 end

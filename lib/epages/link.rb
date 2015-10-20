@@ -1,5 +1,4 @@
 require 'epages/utils'
-require 'pry'
 
 module Epages
   class Link

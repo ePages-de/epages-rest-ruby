@@ -1,10 +1,13 @@
 require 'uri'
 require 'http'
 require 'json'
+require 'epages/utils'
 
 module Epages
   module REST
     class Request
+      include Epages::Utils
+
       BASE_URL = 'https://pm.epages.com/rs/shops/'
       attr_accessor :shop, :uri, :path, :request_method, :options, :headers
 
@@ -16,7 +19,7 @@ module Epages
       end
 
       def set_options(method, options)
-        @options = options
+        @options = camelize_keys(options)
         @request_method = method
         @headers = request_headers
       end
