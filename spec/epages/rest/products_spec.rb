@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pry'
 
 describe 'Epages::REST::Product' do
   before do
@@ -37,6 +36,14 @@ describe 'Epages::REST::Product' do
     it 'do the request passing product_id as Epages::Product' do
       product = @shop.product(@product)
       expect(@product).to eq product
+    end
+  end
+
+  describe 'GET#product_variations' do
+    it 'do the request passing product_id as String' do
+      product = @shop.product_variations(@product.product_id)
+      expect(product[:variation_attributes].first).to be_instance_of Epages::Variation
+      expect(product[:items].first).to be_instance_of Epages::ProductVariation
     end
   end
 end

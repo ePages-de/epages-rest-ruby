@@ -20,11 +20,11 @@ module Epages
       parse_attributes(data)
     end
 
-    def ==(product)
-      return false if product.class != Epages::Product
-      product_id == product.product_id &&
-        name == product.name &&
-        product_number == product.product_number
+    def ==(other)
+      return false if other.class != Epages::Product
+      product_id == other.product_id &&
+        name == other.name &&
+        product_number == other.product_number
     end
   end
 end

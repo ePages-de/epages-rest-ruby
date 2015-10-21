@@ -17,6 +17,13 @@ module Epages
         id = object_id(object)
         perform_get_with_object("/products/#{id}", options, Epages::Product)
       end
+
+      # implements the call https://developer.epages.com/apps/api-reference/get-shops-shopid-products-productid-variations.html
+      def product_variations(object, options = {})
+        id = object_id(object)
+        response = perform_get_request("/products/#{id}/variations", options)
+        parse_product_variations(response)
+      end
     end
   end
 end

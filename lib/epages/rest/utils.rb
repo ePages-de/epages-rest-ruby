@@ -71,6 +71,7 @@ module Epages
         perform_request_with_key_and_objects(:post, path, options, key, klass)
       end
 
+      # TODO: refactor code bellow
       # @param path [String]
       # @param options [Hash]
       # @param key [Symbol]
@@ -81,10 +82,31 @@ module Epages
         end
       end
 
+      # @param path [String]
+      # @param options [Hash]
+      def perform_get_request(path, options)
+        perform_request(:get, path, options)
+      end
+
       def object_id(object)
         return object if object.class == String
         id = object.class.name.demodulize.downcase + '_id'
         object.send(id)
+      end
+
+      def parse_product_variations(data)
+        {
+          variation_attributes: parse_variations(data),
+          items: parse_variation_object(data),
+        }
+      end
+
+      def parse_variations(data)
+        data[:variationAttributes].collect { |el| Epages::Variation.new(el) }
+      end
+
+      def parse_variation_object(data)
+        data[:items].collect { |el| Epages::ProductVariation.new(el) }
       end
     end
   end
