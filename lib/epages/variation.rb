@@ -4,18 +4,22 @@ module Epages
   class Variation
     include Epages::Utils
 
-    attr_accessor :name, :display_name
-
     def initialize(data)
       parse_attributes(data)
     end
 
-    def values
-      @values.collect { |el| el[:value] }
+    def link
+      @link[:href]
     end
 
-    def display_values
-      @values.collect { |el| el[:displayValue] }
+    def product_id
+      link.split('/').last
     end
+
+    def properties
+      Hash[@attribute_selection.collect { |el| [el[:name].downcase.to_sym, el[:value]] }]
+    end
+
+    alias_method :attributes, :properties
   end
 end

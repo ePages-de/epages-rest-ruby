@@ -26,5 +26,13 @@ module Epages
         name == other.name &&
         product_number == other.product_number
     end
+
+    def relative_links
+      @links.map { |l| l.rel }
+    end
+
+    def relative_link(title)
+      relative_links.include? title
+    end
   end
 end

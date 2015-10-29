@@ -88,6 +88,12 @@ module Epages
         perform_request(:get, path, options)
       end
 
+      # @param path [String]
+      # @param options [Hash]
+      def perform_put_request(path, options)
+        perform_request(:put, path, options)
+      end
+
       def object_id(object)
         return object if object.class == String
         id = object.class.name.demodulize.downcase + '_id'
@@ -101,12 +107,27 @@ module Epages
         }
       end
 
+      def parse_product_lowest_price(data)
+        {
+          price_info: parse_price_info(data[:priceInfo]),
+          links: parse_links(data[:links])
+        }
+      end
+
       def parse_variations(data)
-        data[:variationAttributes].collect { |el| Epages::Variation.new(el) }
+        data[:variationAttributes].collect { |el| Epages::VariationAttribute.new(el) }
       end
 
       def parse_variation_object(data)
-        data[:items].collect { |el| Epages::ProductVariation.new(el) }
+        data[:items].collect { |el| Epages::Variation.new(el) }
+      end
+
+      def parse_price_info(data)
+        Epages::PriceInfo.new(data)
+      end
+
+      def parse_links(data)
+        data.map { |link| Epages::Link.new(link) }
       end
     end
   end
