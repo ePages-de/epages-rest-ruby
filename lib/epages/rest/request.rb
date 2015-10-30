@@ -25,12 +25,16 @@ module Epages
       end
 
       def auth_token
-        "Token #{@shop.token}"
+        "Bearer #{@shop.token}"
       end
 
       # @return [Array, Hash]
       def perform
-        options_key = @request_method == :get ? :params : :form
+        case @request_method
+        when :get  then options_key = :params
+        when :put  then options_key = :json
+        when :post then options_key = :form
+        end
         response = HTTP.with(@headers).public_send(@request_method, @uri.to_s, options_key => @options)
         fail_or_return_response_body(response)
       end
@@ -39,7 +43,7 @@ module Epages
         headers = {}
         headers['Content-Type']  = 'application/json'
         headers['Accept']        = '*/*'
-        headers['Authorization'] = auth_token if @shop.token_request?
+        headers['Authorization'] = auth_token if @shop.token?
         headers
       end
 

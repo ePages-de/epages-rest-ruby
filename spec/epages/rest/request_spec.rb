@@ -18,7 +18,7 @@ describe 'Epages::REST::Request' do
       expect(req.request_method).to eq :get
       expect(req.options).to be {}
       expect(req.headers['Accept']).to eq '*/*'
-      expect(req.headers['Authorization']).to eq 'Token token'
+      expect(req.headers['Authorization']).to eq 'Bearer token'
       expect(req.headers['Content-Type']).to eq 'application/json'
     end
 

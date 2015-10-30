@@ -11,11 +11,11 @@ describe Epages::Shop do
     expect(other.token).to be nil
   end
 
-  it '#token_request?' do
+  it '#token?' do
     shop = Epages::Shop.new('shop', 'token')
     other = Epages::Shop.new('other')
 
-    expect(shop.token_request?).to be true
-    expect(other.token_request?).to be false
+    expect(shop.token?).to be true
+    expect(other.token?).to be false
   end
 end

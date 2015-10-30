@@ -110,7 +110,7 @@ module Epages
       def parse_product_lowest_price(data)
         {
           price_info: parse_price_info(data[:priceInfo]),
-          links: parse_links(data[:links])
+          links: parse_links(data[:links]),
         }
       end
 
@@ -127,7 +127,7 @@ module Epages
       end
 
       def parse_links(data)
-        data.map { |link| Epages::Link.new(link) }
+        data.collect { |link| Epages::Link.new(link) }
       end
     end
   end

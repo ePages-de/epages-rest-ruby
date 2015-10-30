@@ -9,7 +9,7 @@ module Epages
       @token = token
     end
 
-    def token_request?
+    def token?
       !!token
     end
   end

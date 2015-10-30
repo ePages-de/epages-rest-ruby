@@ -28,7 +28,7 @@ module Epages
     end
 
     def relative_links
-      @links.map { |l| l.rel }
+      @links.collect(&:rel)
     end
 
     def relative_link(title)

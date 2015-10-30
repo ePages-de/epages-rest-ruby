@@ -3,12 +3,18 @@ require 'pry'
 
 describe 'Epages::REST::Product' do
   before do
-    @shop = Epages::REST::Shop.new('domingo', 'token')
+    token = ENV['shop_token'] || IO.read('spec/fixtures/token.txt')
+    shop_name = ENV['shop_name'] || IO.read('spec/fixtures/shop_name.txt')
+    json_products = JSON.parse(File.read('spec/fixtures/products.json'))['items']
+
+    @shop = Epages::REST::Shop.new(shop_name, token)
     @fail_shop = Epages::REST::Shop.new('non_existing_shop')
+
+    @products = json_products.collect { |product| Epages::Product(product) }
+
     @options = {resultsPerPage: 1}
-    @products = @shop.products
     @product = @products.first
-    @slideshow_product = @products.find {|p| p.relative_link("slideshow") }
+    @slideshow_product = @products.detect { |p| p.relative_link('slideshow') }
   end
 
   describe 'GET#products' do
@@ -52,7 +58,7 @@ describe 'Epages::REST::Product' do
 
   describe 'GET#product_slideshow' do
     it 'get the slideshow' do
-      # TODO: wait for data types 
+      # TODO: wait for data types
       slideshow = @shop.product_slideshow(@slideshow_product.product_id)
       expect(true).to eq false
     end
@@ -89,15 +95,14 @@ describe 'Epages::REST::Product' do
 
   describe 'PUT#change_product_stock_level' do
     it 'change the current stock level' do
-      # TODO: ask for token
-      stock_level = @shop.change_product_stock_level(@product.product_id, {"changeStocklevel": -1})
-      expect(true).to eq false
+      stock_level = @shop.change_product_stock_level(@product.product_id, changeStocklevel: 1)
+      expect(stock_level).to be_a Hash
+      expect(stock_level[:stocklevel]).to be_a Integer
     end
   end
 
   describe 'GET#export_products' do
     it 'get the csv' do
-      # TODO: ?????
       stock_level = @shop.export_products
       expect(true).to eq false
     end
