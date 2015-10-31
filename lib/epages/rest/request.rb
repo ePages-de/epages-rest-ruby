@@ -1,6 +1,4 @@
-require 'uri'
 require 'http'
-require 'json'
 require 'epages/utils'
 
 module Epages
@@ -11,9 +9,9 @@ module Epages
       BASE_URL = 'https://pm.epages.com/rs/shops/'
       attr_accessor :shop, :uri, :path, :request_method, :options, :headers
 
-      def initialize(shop, request_method, path, options = {})
-        @shop = shop
-        @uri = URI.parse(BASE_URL + @shop.name + path)
+      def initialize(object, request_method, path, options = {})
+        @shop = build_shop_from(object)
+        @uri = URI.parse(BASE_URL + @shop.name.to_s + path)
         @path = uri.path
         set_options(request_method, options)
       end
@@ -47,24 +45,11 @@ module Epages
         headers
       end
 
-      def symbolize_keys!(object)
-        if object.is_a?(Array)
-          object.each_with_index do |val, index|
-            object[index] = symbolize_keys!(val)
-          end
-        elsif object.is_a?(Hash)
-          object.keys.each do |key|
-            object[key.to_sym] = symbolize_keys!(object.delete(key))
-          end
-        end
-        object
-      end
-
       def fail_or_return_response_body(response)
         if response.code == 200
           symbolize_keys!(response.parse)
         else
-          fail Epages::Error::ERRORS[response.code]
+          fail Epages::Error::ERRORS[response.code], JSON.parse(response.body.to_s)['message']
         end
       end
     end

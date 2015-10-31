@@ -1,6 +1,7 @@
 require 'epages/custom_attribute'
 require 'epages/error'
 require 'epages/image'
+require 'epages/image_size'
 require 'epages/link'
 require 'epages/price'
 require 'epages/price_info'

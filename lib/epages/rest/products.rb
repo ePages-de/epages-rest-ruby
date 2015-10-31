@@ -28,8 +28,7 @@ module Epages
       # implements the call https://developer.epages.com/apps/api-reference/get-shops-shopid-products-productid-slideshow.html
       def product_slideshow(object)
         id = object_id(object)
-        response = perform_get_request("/products/#{id}/slideshow", {})
-        # TODO: pending to get the standard data-types
+        perform_get_with_key_and_objects("/products/#{id}/slideshow", {}, :items, Epages::ImageSize)
       end
 
       # implements the call https://developer.epages.com/apps/api-reference/get-shops-shopid-products-productid-custom-attributes.html
@@ -58,9 +57,9 @@ module Epages
       end
 
       # implements the call https://developer.epages.com/apps/api-reference/get-shops-shopid-products-productid-stock-level.html
-      def change_product_stock_level(object, options)
+      def change_product_stock_level(object, units)
         id = object_id(object)
-        perform_put_request("/products/#{id}/stock-level", options)
+        perform_put_request("/products/#{id}/stock-level", changeStocklevel: units)
       end
 
       # implements the call https://developer.epages.com/apps/api-reference/get-shops-shopid-products-export.html

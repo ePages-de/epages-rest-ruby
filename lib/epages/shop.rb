@@ -9,6 +9,10 @@ module Epages
       @token = token
     end
 
+    def shop_name
+      @name
+    end
+
     def token?
       !!token
     end

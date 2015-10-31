@@ -1,4 +1,6 @@
 require 'active_support/inflector'
+require 'uri'
+require 'json'
 require 'pry'
 
 module Epages
@@ -41,6 +43,26 @@ module Epages
         hash.delete(k) if key != k
       end
       hash
+    end
+
+    # returns a shop receiving as a parameter an object
+    def build_shop_from(object)
+      return object if object.class == Epages::REST::Shop
+      Epages::REST::Shop.new(object.shop_name)
+    end
+
+    # returns the object replacing all the keys as symbols
+    def symbolize_keys!(object)
+      if object.is_a?(Array)
+        object.each_with_index do |val, index|
+          object[index] = symbolize_keys!(val)
+        end
+      elsif object.is_a?(Hash)
+        object.keys.each do |key|
+          object[key.to_sym] = symbolize_keys!(object.delete(key))
+        end
+      end
+      object
     end
   end
 end
