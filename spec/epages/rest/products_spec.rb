@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'pry'
 
-describe 'Epages::REST::Product' do
+describe 'Epages::REST::Products' do
   let(:token) { ENV['shop_token'] || IO.read('spec/fixtures/token.txt') }
   let(:shop_name) { ENV['shop_name'] || IO.read('spec/fixtures/shop_name.txt') }
   let(:shop) { Epages::REST::Shop.new(shop_name, token) }

@@ -1,5 +1,4 @@
 require 'epages/rest/utils'
-require 'epages/rest/products'
 
 module Epages
   module REST

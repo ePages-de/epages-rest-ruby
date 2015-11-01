@@ -22,6 +22,13 @@ module Epages
         perform_request_with_object(:post, path, options, klass)
       end
 
+      # @param path [String]
+      # @param options [Hash]
+      # @param klass [Class]
+      def perform_put_with_object(path, options, klass)
+        perform_request_with_object(:put, path, options, klass)
+      end
+
       # @param request_method [Symbol]
       # @param path [String]
       # @param options [Hash]
