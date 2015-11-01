@@ -1,7 +1,10 @@
+require 'epages/category'
+require 'epages/content_page_summary'
 require 'epages/custom_attribute'
 require 'epages/error'
 require 'epages/image'
 require 'epages/image_size'
+require 'epages/legal' # posible refactor to the name
 require 'epages/link'
 require 'epages/price'
 require 'epages/price_info'

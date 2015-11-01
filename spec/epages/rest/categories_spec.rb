@@ -28,7 +28,7 @@ describe 'Epages::REST::Categories' do
     end
   end
 
-  describe 'PUT#category' do
+  describe 'PUT#update_category' do
     let(:category) { shop.category(category_id) }
     it 'modifies the category' do
       tmp_data = {name: category.name, description: category.description}

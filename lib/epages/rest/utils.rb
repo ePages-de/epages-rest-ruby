@@ -1,3 +1,4 @@
+require 'pry'
 module Epages
   module REST
     module Utils
@@ -117,6 +118,17 @@ module Epages
       def parse_product_lowest_price(data)
         {
           price_info: parse_price_info(data[:priceInfo]),
+          links: parse_links(data[:links]),
+        }
+      end
+
+      def parse_legal_info(data)
+        {
+          contact_info: Epages::ContentPageSummary.new(data[:contactInformation]),
+          privacy_policy: Epages::ContentPageSummary.new(data[:privacyPolicy]),
+          terms_and_conditions: Epages::ContentPageSummary.new(data[:termsAndConditions]),
+          rights_of_withdrawal: Epages::ContentPageSummary.new(data[:rightsOfWithdrawal]),
+          shipping_info: Epages::ContentPageSummary.new(data[:shippingInformation]),
           links: parse_links(data[:links]),
         }
       end

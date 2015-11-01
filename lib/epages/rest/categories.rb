@@ -1,5 +1,4 @@
 require 'epages/rest/utils'
-require 'epages/category'
 
 module Epages
   module REST
