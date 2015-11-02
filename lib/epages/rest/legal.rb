@@ -1,6 +1,5 @@
 require 'epages/utils'
 require 'epages/rest/utils'
-require 'pry'
 
 module Epages
   module REST

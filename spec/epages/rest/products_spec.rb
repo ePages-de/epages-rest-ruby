@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pry'
 
 describe 'Epages::REST::Products' do
   let(:token) { ENV['shop_token'] || IO.read('spec/fixtures/token.txt') }
