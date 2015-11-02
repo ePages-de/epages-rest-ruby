@@ -45,6 +45,19 @@ module Epages
       hash
     end
 
+    # in order to work with camelcase or underscore-case indistinctly
+    # return the hash with the keys converted to underscore (ruby convention: use underscore variables)
+    #
+    # @param data [Hash]
+    def underscorize_keys(hash)
+      hash.keys.each do |k|
+        key = k.to_s.underscore.to_sym
+        hash[key] = hash[k]
+        hash.delete(k) if key != k
+      end
+      hash
+    end
+
     # returns a shop receiving as a parameter an object
     def build_shop_from(object)
       return object if object.class == Epages::REST::Shop

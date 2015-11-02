@@ -79,7 +79,6 @@ describe 'Epages::REST::Products' do
 
   describe 'GET#product_lowest_price' do
     it 'get lowest price' do
-      # TODO: add lowest price product in mbo and replace products fixtures
       lowest_price = shop.product_lowest_price(lowest_price_product)
       expect(lowest_price).to be_a Hash
       expect(lowest_price).to have_key(:links)

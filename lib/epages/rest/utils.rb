@@ -6,7 +6,9 @@ module Epages
       # @param path [String]
       # @param options [Hash]
       def perform_request(request_method, path, options = {})
-        Epages::REST::Request.new(self, request_method, path, options).perform
+        req = Epages::REST::Request.new(self, request_method, path, options)
+        # binding.pry
+        req.perform
       end
 
       # @param path [String]

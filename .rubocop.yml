@@ -10,7 +10,7 @@ Metrics/MethodLength:
   Max: 10
 
 Metrics/ModuleLength:
-  Max: 150 # TODO: Lower to 100
+  Max: 100
 
 Metrics/ParameterLists:
   Max: 5
