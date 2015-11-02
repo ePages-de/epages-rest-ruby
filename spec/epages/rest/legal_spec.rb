@@ -43,13 +43,13 @@ describe 'Epages::REST::Categories' do
   describe 'PUT#updata_contact_info' do
     let(:contact_info) { shop.contact_info }
     it 'modifies the contact_info' do
-      # TODO: add put tests, current Forbidden 403
       tmp_data = {description: contact_info[:description]}
       new_data = {description: 'New description text'}
 
       new_contact_info = shop.update_contact_info(new_data)
       expect(new_contact_info).to be_a Hash
-      expect(new_contact_info.description).to eq new_data[:description]
+      expect(new_contact_info[:name]).to eq contact_info[:name]
+      expect(new_contact_info[:description]).to eq new_data[:description]
 
       shop.update_contact_info(tmp_data) # restores the previous data
     end
@@ -67,7 +67,16 @@ describe 'Epages::REST::Categories' do
 
   describe 'PUT#update_privacy_policy' do
     let(:privacy_policy) { shop.privacy_policy }
-    it 'get the correct response' do
+    it 'modifies the privacy_policy' do
+      tmp_data = {description: privacy_policy[:description]}
+      new_data = {description: 'New description text'}
+
+      new_privacy_policy = shop.update_privacy_policy(new_data)
+      expect(new_privacy_policy).to be_a Hash
+      expect(new_privacy_policy[:name]).to eq privacy_policy[:name]
+      expect(new_privacy_policy[:description]).to eq new_data[:description]
+
+      shop.update_privacy_policy(tmp_data) # restores the previous data
     end
   end
 
@@ -82,7 +91,17 @@ describe 'Epages::REST::Categories' do
   end
 
   describe 'PUT#update_terms_and_conditions' do
-    it 'get the correct response' do
+    let(:terms_and_conditions) { shop.terms_and_conditions }
+    it 'modifies the terms_and_conditions' do
+      tmp_data = {description: terms_and_conditions[:description]}
+      new_data = {description: 'New description text'}
+
+      new_terms_and_conditions = shop.update_terms_and_conditions(new_data)
+      expect(new_terms_and_conditions).to be_a Hash
+      expect(new_terms_and_conditions[:name]).to eq terms_and_conditions[:name]
+      expect(new_terms_and_conditions[:description]).to eq new_data[:description]
+
+      shop.update_terms_and_conditions(tmp_data) # restores the previous data
     end
   end
 
@@ -97,7 +116,17 @@ describe 'Epages::REST::Categories' do
   end
 
   describe 'PUT#update_rights_of_withdrawal' do
-    it 'get the correct response' do
+    let(:rights_of_withdrawal) { shop.rights_of_withdrawal }
+    it 'modifies the rights_of_withdrawal' do
+      tmp_data = {description: rights_of_withdrawal[:description]}
+      new_data = {description: 'New description text'}
+
+      new_rights_of_withdrawal = shop.update_rights_of_withdrawal(new_data)
+      expect(new_rights_of_withdrawal).to be_a Hash
+      expect(new_rights_of_withdrawal[:name]).to eq rights_of_withdrawal[:name]
+      expect(new_rights_of_withdrawal[:description]).to eq new_data[:description]
+
+      shop.update_rights_of_withdrawal(tmp_data) # restores the previous data
     end
   end
 
@@ -111,7 +140,17 @@ describe 'Epages::REST::Categories' do
   end
 
   describe 'PUT#update_shipping_info' do
-    it 'get the correct response' do
+    let(:shipping_info) { shop.shipping_info }
+    it 'modifies the shipping_info' do
+      tmp_data = {description: shipping_info[:description]}
+      new_data = {description: 'New description text'}
+
+      new_shipping_info = shop.update_shipping_info(new_data)
+      expect(new_shipping_info).to be_a Hash
+      expect(new_shipping_info[:name]).to eq shipping_info[:name]
+      expect(new_shipping_info[:description]).to eq new_data[:description]
+
+      shop.update_shipping_info(tmp_data) # restores the previous data
     end
   end
 end
