@@ -150,6 +150,13 @@ module Epages
       def parse_links(data)
         data.collect { |link| Epages::Link.new(link) }
       end
+
+      def parse_suggestions_to_products(data)
+        data[:products].collect do |p|
+          id = p[:link][:href].split('/').last
+          product(id)
+        end
+      end
     end
   end
 end

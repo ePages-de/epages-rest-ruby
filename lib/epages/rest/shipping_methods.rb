@@ -3,11 +3,11 @@ require 'epages/rest/utils'
 
 module Epages
   module REST
-  	# implement the calls in https://developer.epages.com/apps/api-reference/resource-shipping-method.html
+    # implement the calls in https://developer.epages.com/apps/api-reference/resource-shipping-method.html
     module ShippingMethods
-    	include Epages::Utils
+      include Epages::Utils
 
-    	# implements the call https://developer.epages.com/apps/api-reference/get-shops-shopid-shipping-methods.html
+      # implements the call https://developer.epages.com/apps/api-reference/get-shops-shopid-shipping-methods.html
       def shipping_methods(options = {})
         perform_get_with_objects('/shipping-methods', options, Epages::ShippingMethod)
       end
