@@ -112,10 +112,12 @@ describe 'Epages::REST::Products' do
     end
   end
 
-  describe 'GET#export_products' do
-    it 'get the csv' do
-      export = shop.export_products
-      expect(export).to be_a String
-    end
-  end
+  # TODO: needed a specific app not launched yet
+  #
+  # describe 'GET#export_products' do
+  #   it 'get the csv' do
+  #     export = shop.export_products
+  #     expect(export).to be_a String
+  #   end
+  # end
 end

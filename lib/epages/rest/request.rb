@@ -28,11 +28,7 @@ module Epages
 
       # @return [Array, Hash]
       def perform
-        case @request_method
-        when :get  then options_key = :params
-        when :put  then options_key = :json
-        when :post then options_key = :form
-        end
+        options_key = @request_method == :get ? :params : :json
         response = HTTP.with(@headers).public_send(@request_method, @uri.to_s, options_key => @options)
         fail_or_return_response_body(response)
       end
@@ -46,7 +42,7 @@ module Epages
       end
 
       def fail_or_return_response_body(response)
-        if response.code == 200
+        if response.code.between?(200, 206)
           symbolize_keys!(response.parse)
         else
           fail Epages::Error::ERRORS[response.code], JSON.parse(response.body.to_s)['message']

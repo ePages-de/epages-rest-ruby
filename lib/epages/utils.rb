@@ -19,6 +19,14 @@ module Epages
       instance_variable_set("@#{name.to_s.underscore}", value)
     end
 
+    # @param name [Symbol] [String]
+    # @param data [Hash]
+    # @param klass [Class]
+    def parse_attribute_as_array_of(name, data, klass)
+      value = data.class != Array || data.empty? ? [] : data.collect { |i| klass.new(i) }
+      instance_variable_set("@#{name.to_s.underscore}", value)
+    end
+
     # creates instance variables from the data
     # if klass is passed, create a object initializing with data
     #
@@ -67,13 +75,9 @@ module Epages
     # returns the object replacing all the keys as symbols
     def symbolize_keys!(object)
       if object.is_a?(Array)
-        object.each_with_index do |val, index|
-          object[index] = symbolize_keys!(val)
-        end
+        object.each_with_index { |val, index| object[index] = symbolize_keys!(val) }
       elsif object.is_a?(Hash)
-        object.keys.each do |key|
-          object[key.to_sym] = symbolize_keys!(object.delete(key))
-        end
+        object.keys.each { |key| object[key.to_sym] = symbolize_keys!(object.delete(key)) }
       end
       object
     end

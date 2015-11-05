@@ -11,11 +11,11 @@ module Epages
     end
 
     def formatted_values
-      @values.collect { |el| el[:value] }
+      values.collect { |el| el[:value] }
     end
 
     def display_values
-      @values.collect { |el| el[:displayValue] }
+      values.collect { |el| el[:displayValue] }
     end
   end
 end

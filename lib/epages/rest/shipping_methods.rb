@@ -14,7 +14,7 @@ module Epages
 
       # implements the call https://developer.epages.com/apps/api-reference/get-shops-shopid-shipping-methods-shippingmethodid.html
       def shipping_method(object, options = {})
-        id = object_id(object)
+        id = epages_id(object)
         perform_get_with_object("/shipping-methods/#{id}", options, Epages::ShippingMethod)
       end
     end

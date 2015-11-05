@@ -32,6 +32,13 @@ module Epages
         perform_request_with_object(:put, path, options, klass)
       end
 
+      # @param path [String]
+      # @param options [Hash]
+      # @param klass [Class]
+      def perform_delete_with_object(path, options, klass)
+        perform_request_with_object(:delete, path, options, klass)
+      end
+
       # @param request_method [Symbol]
       # @param path [String]
       # @param options [Hash]
@@ -104,10 +111,10 @@ module Epages
         perform_request(:put, path, options)
       end
 
-      def object_id(object)
+      def epages_id(object)
         return object if object.class == String
-        id = object.class.name.demodulize.downcase + '_id'
-        object.send(id)
+        return if object.class.name.deconstantize != 'Epages'
+        object.send("#{object.class.name.demodulize.downcase}_id")
       end
 
       def parse_product_variations(data)

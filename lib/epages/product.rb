@@ -10,31 +10,29 @@ module Epages
     include Epages::Utils
     include Epages::REST::Products
 
-    attr_accessor :product_id, :name, :short_description, :description, :images, :price_info,
-                  :for_sale, :special_offer, :delivery_weight, :shipping_methods_restricted_to,
-                  :availability_text, :availability, :energy_labels_string, :energy_label_source_file,
-                  :product_data_sheet, :sf_url, :product_number, :manufacturer, :upc, :ean, :links
+    attr_reader :product_id, :name, :short_description, :description, :images, :price_info,
+                :for_sale, :special_offer, :delivery_weight, :shipping_methods_restricted_to,
+                :availability_text, :availability, :energy_labels_string, :energy_label_source_file,
+                :product_data_sheet, :sf_url, :product_number, :manufacturer, :upc, :ean, :links
 
     def initialize(data)
-      @images = data.delete(:images).collect { |i| Epages::Image.new(i) }
-      @links = data.delete(:links).collect { |i| Epages::Link.new(i) }
+      parse_attribute_as_array_of(:images, data.delete(:images), Epages::Image)
+      parse_attribute_as_array_of(:links, data.delete(:links), Epages::Link)
       parse_attribute_as(:priceInfo, data.delete(:priceInfo), Epages::PriceInfo)
       parse_attributes(data)
     end
 
     def ==(other)
-      return false if other.class != Epages::Product
-      product_id == other.product_id &&
-        name == other.name &&
-        product_number == other.product_number
+      return false unless other.is_a? Epages::Product
+      product_id == other.product_id && name == other.name && product_number == other.product_number
     end
 
     def shop_name
-      %r{ sf_url[/epages\/(\w+)/i, 1] }
+      sf_url[%r{epages\/(\w+)}, 1]
     end
 
     def links_title
-      @links.collect(&:rel)
+      links.collect(&:rel)
     end
 
     def link?(name)
@@ -43,6 +41,10 @@ module Epages
 
     def slideshow
       product_slideshow(self) if link?('slideshow')
+    end
+
+    def variations
+      product_variations(self) if link?('variations')
     end
 
     def custom_attributes
@@ -57,12 +59,16 @@ module Epages
       product_lowest_price(self) if link?('lowest-price')
     end
 
-    def stock_level?
+    def stock_level
       product_stock_level(self)[:stocklevel]
     end
 
     def change_stock_level_in(units, shop)
       shop.change_product_stock_level(self, units)[:stocklevel]
+    end
+
+    def to_line_item(quantity = 1)
+      {productId: product_id, quantity: quantity}
     end
   end
 end
