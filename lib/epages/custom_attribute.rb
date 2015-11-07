@@ -13,7 +13,7 @@ module Epages
     end
 
     def formatted_attributes
-      Hash[@display_key, @values.collect { |v| v[:displayValue] }]
+      Hash[display_key, values.collect { |v| v[:displayValue] }]
     end
   end
 end

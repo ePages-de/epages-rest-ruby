@@ -10,10 +10,12 @@ module Epages
       parse_attributes(data)
     end
 
+    # returns an array with all the values
     def formatted_values
       values.collect { |el| el[:value] }
     end
 
+    # returns an array with all the display_values
     def display_values
       values.collect { |el| el[:displayValue] }
     end

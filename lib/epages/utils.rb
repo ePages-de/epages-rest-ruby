@@ -1,4 +1,5 @@
 require 'active_support/inflector'
+require 'date'
 require 'uri'
 require 'json'
 require 'pry'
@@ -7,8 +8,8 @@ module Epages
   module Utils
   module_function
 
-    # creates instance variable from the data
-    # if klass is passed, create a object initializing with data
+    # creates a instance variable (underscore) from the [data]
+    # if [klass] is passed, creates a object of [klass] initialized with data
     #
     # @param name [Symbol] [String]
     # @param data [Hash]
@@ -19,6 +20,8 @@ module Epages
       instance_variable_set("@#{name.to_s.underscore}", value)
     end
 
+    # creates a instance variable (underscore). This variable contains an array of <klass> or empty array
+    #
     # @param name [Symbol] [String]
     # @param data [Hash]
     # @param klass [Class]
@@ -40,8 +43,7 @@ module Epages
       end
     end
 
-    # in order to work with camelcase or underscore-case indistinctly
-    # return the hash with the keys converted to lower camelcase (the API works with camelcase)
+    # return the hash with the keys converted to lower camelcase
     #
     # @param data [Hash]
     def camelize_keys(hash)
@@ -53,8 +55,7 @@ module Epages
       hash
     end
 
-    # in order to work with camelcase or underscore-case indistinctly
-    # return the hash with the keys converted to underscore (ruby convention: use underscore variables)
+    # return the hash with the keys converted to underscore
     #
     # @param data [Hash]
     def underscorize_keys(hash)
@@ -66,10 +67,10 @@ module Epages
       hash
     end
 
-    # returns a shop receiving as a parameter an object
-    def build_shop_from(object)
-      return object if object.class == Epages::REST::Shop
-      Epages::REST::Shop.new(object.shop_name)
+    # returns a shop. If [shop] is not a Epages::REST::Shop create one calling the [shop] method shop_mame
+    def build_shop_from(shop)
+      return shop if shop.is_a? Epages::REST::Shop
+      Epages::REST::Shop.new(shop.shop_name)
     end
 
     # returns the object replacing all the keys as symbols
@@ -80,11 +81,6 @@ module Epages
         object.keys.each { |key| object[key.to_sym] = symbolize_keys!(object.delete(key)) }
       end
       object
-    end
-
-    # set the attr_readers from each class
-    def set_attr_readers
-      (class << self; self; end).send(:attr_reader, *keys)
     end
   end
 end
