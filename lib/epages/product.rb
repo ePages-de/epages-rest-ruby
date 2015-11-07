@@ -10,10 +10,11 @@ module Epages
     include Epages::Utils
     include Epages::REST::Products
 
-    attr_reader :product_id, :name, :short_description, :description, :images, :price_info,
-                :for_sale, :special_offer, :delivery_weight, :shipping_methods_restricted_to,
-                :availability_text, :availability, :energy_labels_string, :energy_label_source_file,
-                :product_data_sheet, :sf_url, :product_number, :manufacturer, :upc, :ean, :links
+    KEYS = %w(product_id name short_description description images price_info for_sale special_offer delivery_weight
+              shipping_methods_restricted_to availability_text availability energy_labels_string energy_label_source_file
+              product_data_sheet sf_url product_number manufacturer upc ean links).collect(&:to_sym).freeze
+
+    attr_reader *KEYS
 
     def initialize(data)
       parse_attribute_as_array_of(:images, data.delete(:images), Epages::Image)
@@ -69,6 +70,9 @@ module Epages
 
     def to_line_item(quantity = 1)
       {productId: product_id, quantity: quantity}
+    end
+
+    def to_json
     end
   end
 end

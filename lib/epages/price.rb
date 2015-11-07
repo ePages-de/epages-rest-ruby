@@ -4,7 +4,9 @@ module Epages
   class Price
     include Epages::Utils
 
-    attr_accessor :tax_type, :formatted, :amount, :currency
+    KEYS = %w(tax_type formatted amount currency).collect(&:to_sym).freeze
+
+    attr_reader *KEYS
 
     def initialize(data)
       parse_attributes(data)

@@ -1,11 +1,12 @@
 require 'epages/utils'
-require 'pry'
 
 module Epages
   class Cart
     include Epages::Utils
 
-    attr_accessor :cart_id, :billing_address, :shipping_address, :line_item_container, :min_cart_value, :checkout_url
+    KEYS = %w(cart_id billing_address shipping_address line_item_container min_cart_value checkout_url).collect(&:to_sym).freeze
+
+    attr_reader *KEYS
 
     def initialize(data)
       parse_attribute_as(:billing_address, data.delete(:billingAddress), Epages::Address)

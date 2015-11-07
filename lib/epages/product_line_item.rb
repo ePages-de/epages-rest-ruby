@@ -4,8 +4,9 @@ module Epages
   class ProductLineItem
     include Epages::Utils
 
-    attr_accessor :line_item_id, :sku, :name, :product_id, :quantity,
-                  :line_item_price, :single_item_price, :images, :links
+    KEYS = %w(line_item_id sku name product_id quantity line_item_price single_item_price images links).collect(&:to_sym).freeze
+
+    attr_reader *KEYS
 
     def initialize(data)
       parse_attribute_as_array_of(:images, data.delete(:images), Epages::Image)

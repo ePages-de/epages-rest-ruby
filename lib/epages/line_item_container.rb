@@ -4,8 +4,9 @@ module Epages
   class LineItemContainer
     include Epages::Utils
 
-    attr_accessor :grand_total, :total_before_tax, :total_tax, :line_items_sub_total,
-                  :product_line_items, :shipping_price
+    KEYS = %w(grand_total total_before_tax total_tax line_items_sub_total product_line_items shipping_price).collect(&:to_sym).freeze
+
+    attr_reader *KEYS
 
     def initialize(data)
       parse_attribute_as(:grand_total, data[:grandTotal], Epages::Price)

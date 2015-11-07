@@ -4,6 +4,8 @@ module Epages
   class Variation
     include Epages::Utils
 
+    attr_reader :link, :attribute_selection
+
     def initialize(data)
       parse_attributes(data)
     end

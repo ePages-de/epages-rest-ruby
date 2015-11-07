@@ -1,4 +1,4 @@
 require 'spec_helper'
 
-describe Epages::ContentPageSummay do
+describe Epages::ContentPageSummary do
 end

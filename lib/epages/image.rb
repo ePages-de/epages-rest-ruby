@@ -4,7 +4,7 @@ module Epages
   class Image
     include Epages::Utils
 
-    attr_accessor :url, :classifier
+    attr_reader :url, :classifier
 
     def initialize(data)
       parse_attributes(data)

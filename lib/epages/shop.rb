@@ -10,7 +10,7 @@ module Epages
     end
 
     def shop_name
-      @name
+      name
     end
 
     def token?

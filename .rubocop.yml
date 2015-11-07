@@ -1,3 +1,6 @@
+Lint/AmbiguousOperator:
+  Enabled: false
+
 Metrics/BlockNesting:
   Max: 2
 

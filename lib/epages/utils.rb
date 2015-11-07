@@ -81,5 +81,10 @@ module Epages
       end
       object
     end
+
+    # set the attr_readers from each class
+    def set_attr_readers
+      (class << self; self; end).send(:attr_reader, *keys)
+    end
   end
 end

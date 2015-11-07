@@ -4,7 +4,9 @@ module Epages
   class CustomAttribute
     include Epages::Utils
 
-    attr_accessor :key, :display_key, :single_value, :type, :values
+    KEYS = %w(key display_key single_value type values).collect(&:to_sym).freeze
+
+    attr_reader *KEYS
 
     def initialize(data)
       parse_attributes(data)
