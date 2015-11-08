@@ -15,6 +15,9 @@ describe Epages::Product do
       it 'compare with different product' do
         expect(products.last).to_not eq product
       end
+      it 'compare with different another thing' do
+        expect(products.last).to_not eq shop
+      end
     end
 
     describe 'shop_name' do

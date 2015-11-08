@@ -1,8 +1,4 @@
 require 'epages/utils'
-require 'epages/error'
-require 'epages/image'
-require 'epages/link'
-require 'epages/price_info'
 require 'epages/rest/products'
 
 module Epages

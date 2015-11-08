@@ -60,7 +60,7 @@ describe 'Epages::REST::Products' do
       slideshow = shop.product_slideshow(slideshow_product)
       slideshow.each do |i|
         expect(i).to be_a Epages::ImageSize
-        i.sizes.each { |s| expect(s).to be_a Epages::Image }
+        i.images.each { |s| expect(s).to be_a Epages::Image }
       end
     end
 

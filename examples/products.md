@@ -57,4 +57,16 @@ This call returns you a Hash with the keys:
    * **product_id**: returns the id of the variation (different from the main product).
    * **properties**: returns a Hash with all the properties and their respective value.
    * **attributes**: alias for properties.
+   
+## [Slideshow of a product](https://developer.epages.com/apps/api-reference/get-shops-shopid-products-productid-slideshow.html)
 
+Some products have a collection of images associated. To get this images:
+```
+slides = shop.product_slideshow(product)
+product_slides = product.slideshow
+```
+
+This call returns an array of [Epages::ImageSize]. 
+This class defines at the same time a list of [Epages::Image] in different sizes and provides the next methods:
+ * **sizes**: returns the list of the available sizes.
+ * **size_link**(size): return the url of the link with the size passed as a parameter.
