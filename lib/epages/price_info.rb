@@ -10,7 +10,8 @@ module Epages
     attr_reader *KEYS
 
     def initialize(data)
-      @quantity = data.delete(:quantity)
+      parse_attribute_as(:quantity, data.delete(:quantity))
+      parse_attribute_as(:base_price, data.delete(:basePrice), Epages::BasePrice)
       parse_attributes(data, Epages::Price)
     end
   end

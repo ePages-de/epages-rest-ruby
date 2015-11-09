@@ -12,8 +12,9 @@ module Epages
       parse_attributes(data)
     end
 
+    # return a Hash with the display value as key and an array with all the displayValue as value
     def formatted_attributes
-      Hash[display_key, values.collect { |v| v[:displayValue] }]
+      Hash[display_key, values.collect(&:displayValue)]
     end
   end
 end
