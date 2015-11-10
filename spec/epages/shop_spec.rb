@@ -11,7 +11,7 @@ describe Epages::Shop do
   end
 
   it 'shop_name' do
-    expect(shop.shop_name).to eq 'domingo'
+    expect(shop.shop_name).to eq 'shop'
   end
 
   it '#token?' do

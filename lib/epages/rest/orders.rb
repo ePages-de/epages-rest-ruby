@@ -12,15 +12,18 @@ module Epages
       end
 
       # implements the calls in https://developer.epages.com/apps/api-reference/get-shops-shopid-orders-orderid.html
-      def order(object, options = {})
-        id = epages_id(object)
+      def order(order, options = {})
+        id = epages_id(order)
         perform_get_with_object("/orders/#{id}", options, Epages::Order)
       end
 
       # implements the calls in https://developer.epages.com/apps/api-reference/put-shops-shopid-orders-orderid.html
       def update_order(order, options, locale = 'en_GB')
+        # TODO: cover nested attributes changes
+        options.each { |k, v| options[k] = v.to_json if v.class.name.deconstantize == 'Epages' }
         id = epages_id(order)
-        perform_put_with_object("/orders/#{id}?locale=#{locale}", order(id).merge(options), Epages::Order)
+        old_order = perform_get_request("/orders/#{id}", locale: locale)
+        perform_put_with_object("/orders/#{id}?locale=#{locale}", old_order.merge(options), Epages::Order)
       end
     end
   end

@@ -1,4 +1,5 @@
 require 'epages/address'
+require 'epages/base_price'
 require 'epages/cart'
 require 'epages/category'
 require 'epages/content_page_summary'
