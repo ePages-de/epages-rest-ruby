@@ -10,14 +10,14 @@ module Epages
       parse_attributes(data)
     end
 
-    # returns the link of the variation
-    def link
-      @link[:href]
+    # returns the url of the variation
+    def url
+      link.href
     end
 
     # returns the product_id of the variation
     def product_id
-      link.split('/').last
+      url.split('/').last
     end
 
     # returns a hash formatting the property and the respective value as a pair of the hash

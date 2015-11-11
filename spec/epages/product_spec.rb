@@ -1,9 +1,6 @@
 require 'spec_helper'
 
 describe Epages::Product do
-  let(:token) { ENV['shop_token'] || IO.read('spec/fixtures/token.txt') }
-  let(:shop_name) { ENV['shop_name'] || IO.read('spec/fixtures/shop_name.txt') }
-  let(:shop) { Epages::REST::Shop.new(shop_name, token) }
   let(:json_products) { JSON.parse(File.read('spec/fixtures/products.json'))['items'] }
   let(:products) { json_products.collect { |p| Epages::Product.new(Epages::Utils.symbolize_keys!(p)) } }
   let(:product) { products.first }
@@ -16,7 +13,7 @@ describe Epages::Product do
         expect(products.last).to_not eq product
       end
       it 'compare with different another thing' do
-        expect(products.last).to_not eq shop
+        expect(products.last).to_not eq 'not_a_epages_product'
       end
     end
 

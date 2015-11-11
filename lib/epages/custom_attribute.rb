@@ -14,7 +14,7 @@ module Epages
 
     # return a Hash with the display value as key and an array with all the displayValue as value
     def formatted_attributes
-      Hash[display_key, values.collect(&:displayValue)]
+      Hash[display_key.downcase.to_sym, values.collect{ |el| el[:displayValue] }]
     end
   end
 end

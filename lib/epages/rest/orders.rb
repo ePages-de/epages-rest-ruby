@@ -19,7 +19,6 @@ module Epages
 
       # implements the calls in https://developer.epages.com/apps/api-reference/put-shops-shopid-orders-orderid.html
       def update_order(order, options, locale = 'en_GB')
-        # TODO: cover nested attributes changes
         options.each { |k, v| options[k] = v.to_json if v.class.name.deconstantize == 'Epages' }
         id = epages_id(order)
         old_order = perform_get_request("/orders/#{id}", locale: locale)

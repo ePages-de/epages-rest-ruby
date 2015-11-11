@@ -19,7 +19,8 @@ module Epages
     #
     # @param size [String]. The name of the image classifier
     def size_link(size)
-      images.find { |i| i.classifier == size }.url
+      link = images.find { |i| i.classifier == size }
+      link ? link.url : nil
     end
   end
 end
