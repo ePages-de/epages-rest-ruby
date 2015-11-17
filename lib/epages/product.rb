@@ -75,8 +75,8 @@ module Epages
     #
     # @param units [Fixnum]. Number of units to change. Can be negative
     # @param shop [Epages::Shop]. The shop that contains the authorization to do the call
-    def change_stock_level_in(units, shop)
-      shop.change_product_stock_level(self, units)[:stocklevel]
+    def change_stock_level(units, shop)
+      shop.product_change_stock_level(self, units)[:stocklevel]
     end
 
     # return a hash with productId and quantity. This format is used for the line_items of Cart

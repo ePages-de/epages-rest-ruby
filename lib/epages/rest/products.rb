@@ -81,7 +81,7 @@ module Epages
       # @param product [String], [Epages::Product]
       def product_stock_level(product)
         id = epages_id(product)
-        perform_get_request("/products/#{id}/stock-level", {})
+        perform_get_request("/products/#{id}/stock-level", {})[:stocklevel]
       end
 
       # call the API to modify the current stock level of the product
@@ -89,9 +89,9 @@ module Epages
       #
       # @param product [String], [Epages::Product]
       # @param units [Fixnum]
-      def change_product_stock_level(product, units)
+      def product_change_stock_level(product, units)
         id = epages_id(product)
-        perform_put_request("/products/#{id}/stock-level", changeStocklevel: units)
+        perform_put_request("/products/#{id}/stock-level", changeStocklevel: units)[:stocklevel]
       end
 
       # call the API and return a CSV with the proper data of the products

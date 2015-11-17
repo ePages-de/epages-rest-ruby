@@ -16,7 +16,7 @@ Between these methods are:
  * **categories**: if the product has the link to the categories call, this method do the respective call to the API and retrieve the information.
  * **lowest_price**: if the product has the link to the lowest-price call, this method do the respective call to the API and retrieve the information.
  * **stock_level**: retrieves the stock level of the product from the API.
- * **change_stock_level_in**(quantity): changes the stock level of the product in the quantity indicated as a parameter. Requires Authentication Token included in the shop`.
+ * **change_stock_level**(quantity,shop): changes the stock level of the product in the quantity indicated as a parameter. Requires Authentication Token included in the shop`.
  * **to_line_item**(quantity): return a Hash with the product_id and the quantity. This method ease to put a product in a cart.
 
 ## [Products call](https://developer.epages.com/apps/api-reference/get-shops-shopid-products.html)
@@ -71,37 +71,59 @@ This class defines at the same time a list of [Epages::Image] in different sizes
  * **sizes**: returns the list of the available sizes.
  * **size_link**(size): return the url of the link with the size passed as a parameter.
 
- ## [Custom Attributes of a product](https://developer.epages.com/apps/api-reference/get-shops-shopid-products-productid-custom-attributes.html)
+## [Custom Attributes of a product](https://developer.epages.com/apps/api-reference/get-shops-shopid-products-productid-custom-attributes.html)
 
- This call is used to get all the custom attributes associated with the product, like dimensions or weight. To get this attributes:
- ```
- attributes = shop.product_custom_attributes(product)
- product_attrs = product.custom_attributes
- ```
+This call is used to get all the custom attributes associated with the product, like dimensions or weight. To get this attributes:
+```
+attributes = shop.product_custom_attributes(product)
+product_attrs = product.custom_attributes
+```
 
- This call returns an array of [Epages::CustomAttribute].
- This class defines also define the method:
-  * **formatted_attributes**: return a Hash with the display value as key and an array with all the displayValue as value
+This call returns an array of [Epages::CustomAttribute].
+This class defines also define the method:
+ * **formatted_attributes**: return a Hash with the display value as key and an array with all the displayValue as value
 
- ## [Lowest Price of a product](https://developer.epages.com/apps/api-reference/get-shops-shopid-products-productid-lowest-price.html)
+## [Lowest Price of a product](https://developer.epages.com/apps/api-reference/get-shops-shopid-products-productid-lowest-price.html)
 
- This call is used to get the lowest price of the product among all the variations. To get this lowest price:
- ```
- price = shop.product_lowest_price(product)
- product_price = product.lowest_price
- ```
+This call is used to get the lowest price of the product among all the variations. To get this lowest price:
+```
+price = shop.product_lowest_price(product)
+product_price = product.lowest_price
+```
 
- This call returns a Hash with 2 keys:
-  * **links**: array of links that contains the links to the product with the lowest price.
-  * **price_info**: instance of [Epages::PriceInfo](https://developer.epages.com/apps/data-types.html#priceinfo)
+This call returns a Hash with 2 keys:
+ * **links**: array of links that contains the links to the product with the lowest price.
+ * **price_info**: instance of [Epages::PriceInfo](https://developer.epages.com/apps/data-types.html#priceinfo)
 
- ## [Categories of a product](https://developer.epages.com/apps/api-reference/get-shops-shopid-products-productid-categories.html)
+## [Categories of a product](https://developer.epages.com/apps/api-reference/get-shops-shopid-products-productid-categories.html)
 
- This call is used to get the categories that the product belongs to.
-  ```
-  categories = shop.product_categories(product)
-  product_categories = product.categories
-  ```
+This call is used to get the categories that the product belongs to.
+```
+categories = shop.product_categories(product)
+product_categories = product.categories
+```
 
-  This call return an array of [Epages::Link] referring to the category url.
+This call return an array of [Epages::Link] referring to the category url.
   
+## [Product Stock](https://developer.epages.com/apps/api-reference/get-shops-shopid-products-productid-stock-level.html)
+
+This call is used to get number of units in stock of the provided product.
+```
+stock_units = shop.product_stock_level(product)
+stock = product.stock_level
+```
+
+This call return a Integer number.
+
+## [Change Product Stock](https://developer.epages.com/apps/api-reference/put-shops-shopid-products-productid-stock-level.html)
+
+This call is used to get number of units in stock of the provided product.
+```
+update_stock = shop.product_change_stock_level(product, 1)
+new_stock = product.change_stock_level(1, shop) # the token to allow you to access your shop is inside the shop variable, so you need to provide it 
+```
+
+This call return a Integer number referring to the new stock.
+
+
+

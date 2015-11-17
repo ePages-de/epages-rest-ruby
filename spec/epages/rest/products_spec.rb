@@ -97,18 +97,14 @@ describe 'Epages::REST::Products' do
   describe 'GET#product_stock_level' do
     it 'get the stock level' do
       stock_level = shop.product_stock_level(product)
-      expect(stock_level).to be_a Hash
-      expect(stock_level).to have_key(:stocklevel)
-      expect(stock_level[:stocklevel]).to be_a Integer
+      expect(stock_level).to be_a Integer
     end
   end
 
-  describe 'PUT#change_product_stock_level' do
+  describe 'PUT#product_change_stock_level' do
     it 'change the current stock level' do
-      stock_level = shop.change_product_stock_level(product, 1)
-      expect(stock_level).to be_a Hash
-      expect(stock_level).to have_key(:stocklevel)
-      expect(stock_level[:stocklevel]).to be_a Integer
+      stock_level = shop.product_change_stock_level(product, 1)
+      expect(stock_level).to be_a Integer
     end
   end
 
