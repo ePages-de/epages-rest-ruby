@@ -8,6 +8,12 @@ A Ruby interface to the Epages REST API
 gem install epages
 ```
 
+You can require it in the Ruby Interpreter using:
+```
+require 'epages'
+```
+or add it to your Rails application adding the gem to your Gemfile.
+
 ## Usage
 
 This gem is used to connect any Ruby application with any [Epages](http://www.epages.com/en/) Shop.

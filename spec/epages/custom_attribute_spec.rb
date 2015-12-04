@@ -6,7 +6,7 @@ describe Epages::CustomAttribute do
   describe '#methods' do
     it 'formatted_attributes' do
       expect(custom_attribute.formatted_attributes).to have_key(:preview)
-      expect(custom_attribute.formatted_attributes[:preview]).to eq ['value1', 'value2']
+      expect(custom_attribute.formatted_attributes[:preview]).to eq %w(value1 value2)
     end
   end
 end
