@@ -1,4 +1,3 @@
-require 'pry'
 module Epages
   module REST
     module Utils
@@ -6,9 +5,7 @@ module Epages
       # @param path [String]
       # @param options [Hash]
       def perform_request(request_method, path, options = {})
-        req = Epages::REST::Request.new(self, request_method, path, options)
-        # binding.pry
-        req.perform
+        Epages::REST::Request.new(self, request_method, path, options).perform
       end
 
       # @param path [String]

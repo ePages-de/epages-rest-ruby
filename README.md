@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ePages-de/epages-rest-ruby.svg)](https://travis-ci.org/ePages-de/epages-rest-ruby)
+
 # The Epages REST Ruby Gem
 
 A Ruby interface to the Epages REST API
@@ -5,12 +7,12 @@ A Ruby interface to the Epages REST API
 ## Installation
 
 ```
-gem install epages
+gem install epages-rest
 ```
 
 You can require it in the Ruby Interpreter using:
 ```
-require 'epages'
+require 'epages-rest'
 ```
 or add it to your Rails application adding the gem to your Gemfile.
 
@@ -28,7 +30,7 @@ Once this is done, you can use the API calls.
 
 #### [Get products](https://developer.epages.com/apps/api-reference/get-shops-shopid-products.html)
 `products = shop.products`
-`sorted_products = shop.products({sort: name})`
+`sorted_products = shop.products(sort: name)`
 
 #### [Get Categories](https://developer.epages.com/apps/api-reference/get-shops-shopid-categories.html)
 `categories = shop.categories`

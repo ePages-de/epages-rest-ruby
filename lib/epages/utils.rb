@@ -2,7 +2,6 @@ require 'active_support/inflector'
 require 'date'
 require 'uri'
 require 'json'
-require 'pry'
 
 module Epages
   module Utils
