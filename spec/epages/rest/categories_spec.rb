@@ -3,8 +3,9 @@ require 'spec_helper'
 describe 'Epages::REST::Categories' do
   let(:token) { ENV['shop_token'] || IO.read('spec/fixtures/token.txt') }
   let(:shop_name) { ENV['shop_name'] || IO.read('spec/fixtures/shop_name.txt') }
-  let(:shop) { Epages::REST::Shop.new(shop_name, token) }
-  let(:no_token_shop) { Epages::REST::Shop.new('domingo') }
+  let(:shop_host) { ENV['shop_host'] || IO.read('spec/fixtures/shop_host.txt') }
+  let(:shop) { Epages::REST::Shop.new(shop_host, shop_name, token) }
+  let(:no_token_shop) { Epages::REST::Shop.new(shop_host, shop_name) }
 
   let(:json_categories) { JSON.parse(File.read('spec/fixtures/categories.json')) }
   let(:categories) { json_categories.collect { |c| Epages::Category.new(Epages::Utils.symbolize_keys!(c)) } }

@@ -3,8 +3,9 @@ require 'spec_helper'
 describe 'Epages::REST::Orders' do
   let(:token) { ENV['shop_token'] || IO.read('spec/fixtures/token.txt') }
   let(:shop_name) { ENV['shop_name'] || IO.read('spec/fixtures/shop_name.txt') }
-  let(:shop) { Epages::REST::Shop.new(shop_name, token) }
-  let(:fail_shop) { Epages::REST::Shop.new('non_existing_shop') }
+  let(:shop_host) { ENV['shop_host'] || IO.read('spec/fixtures/shop_host.txt') }
+  let(:shop) { Epages::REST::Shop.new(shop_host, shop_name, token) }
+  let(:fail_shop) { Epages::REST::Shop.new(shop_host, 'non_existing_shop') }
 
   let(:json_orders) { JSON.parse(File.read('spec/fixtures/orders.json'))['items'] }
   let(:orders) { json_orders.collect { |p| Epages::Order.new(Epages::Utils.symbolize_keys!(p)) } }

@@ -36,5 +36,6 @@ tmp/*
 .ruby-gemset
 .ruby-version
 spec/fixtures/token.txt
+spec/fixtures/shop_host.txt
 spec/fixtures/shop_name.txt
 *.gem

@@ -2,9 +2,10 @@ require 'epages/error'
 
 module Epages
   class Shop
-    attr_accessor :name, :token
+    attr_accessor :host, :name, :token
 
-    def initialize(name, token = nil)
+    def initialize(host, name, token = nil)
+      @host = host
       @name = name
       @token = token
     end

@@ -8,9 +8,8 @@ group :development do
 end
 
 group :test do
-  gem 'coveralls'
+  gem 'codeclimate-test-reporter'
   gem 'rspec', '>= 2.14'
-  gem 'simplecov', '>= 0.9'
   gem 'rubocop'
   gem 'timecop'
   gem 'webmock'

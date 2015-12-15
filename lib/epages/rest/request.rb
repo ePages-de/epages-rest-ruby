@@ -6,12 +6,11 @@ module Epages
     class Request
       include Epages::Utils
 
-      BASE_URL = 'https://pm.epages.com/rs/shops/'
       attr_accessor :shop, :uri, :path, :request_method, :options, :headers
 
       def initialize(object, request_method, path, options = {})
         @shop = build_shop_from(object)
-        @uri = URI.parse(BASE_URL + @shop.name.to_s + path)
+        @uri = URI.parse("https://#{@shop.host}/rs/shops/#{@shop.name.to_s + path}")
         @path = uri.path
         set_options(request_method, options)
       end

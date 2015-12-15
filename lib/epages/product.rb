@@ -31,6 +31,11 @@ module Epages
       sf_url[%r{epages\/(\w+)}, 1]
     end
 
+    # returns the host of the shop that belongs to the product
+    def host
+      URI.parse(sf_url).host
+    end
+
     # returns the list of links
     def links_title
       links.collect(&:rel)

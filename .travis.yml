@@ -10,3 +10,7 @@ os:
 sudo: false
 
 before_install: gem install bundler -v 1.10.6
+
+addons:
+  code_climate:
+    repo_token: 8d5146ea881110046b5a586eec716090682ef65abe74051657a86394cd0df335

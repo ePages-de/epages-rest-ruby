@@ -3,8 +3,9 @@ require 'spec_helper'
 describe 'Epages::REST::Legal' do
   let(:token) { ENV['shop_token'] || IO.read('spec/fixtures/token.txt') }
   let(:shop_name) { ENV['shop_name'] || IO.read('spec/fixtures/shop_name.txt') }
-  let(:shop) { Epages::REST::Shop.new(shop_name, token) }
-  let(:no_token_shop) { Epages::REST::Shop.new('domingo') }
+  let(:shop_host) { ENV['shop_host'] || IO.read('spec/fixtures/shop_host.txt') }
+  let(:shop) { Epages::REST::Shop.new(shop_host, shop_name, token) }
+  let(:no_token_shop) { Epages::REST::Shop.new(shop_name) }
 
   let(:options) { {locale: 'en_US'} }
 

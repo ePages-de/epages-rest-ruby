@@ -69,7 +69,7 @@ module Epages
     # returns a shop. If [shop] is not a Epages::REST::Shop create one calling the [shop] method shop_mame
     def build_shop_from(shop)
       return shop if shop.is_a? Epages::REST::Shop
-      Epages::REST::Shop.new(shop.shop_name)
+      Epages::REST::Shop.new(shop.host, shop.shop_name)
     end
 
     # returns the object replacing all the keys as symbols

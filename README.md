@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/ePages-de/epages-rest-ruby.svg)](https://travis-ci.org/ePages-de/epages-rest-ruby)
+[![Code Climate](https://codeclimate.com/github/ePages-de/epages-rest-ruby/badges/gpa.svg)](https://codeclimate.com/github/ePages-de/epages-rest-ruby)
+[![Test Coverage](https://codeclimate.com/github/ePages-de/epages-rest-ruby/badges/coverage.svg)](https://codeclimate.com/github/ePages-de/epages-rest-ruby/coverage)
 
 # The Epages REST Ruby Gem
 
@@ -24,7 +26,7 @@ You can get any public information of any shop indicating only the name of the s
 # Usage examples
 
 The first thing is create your REST shop.
-`shop = Epages::REST::Shop.new('shop_name')` or `shop = Epages::REST::Shop.new('shop_name', 'token')`
+`shop = Epages::REST::Shop.new(shop_host, shop_name)` or `shop = Epages::REST::Shop.new(shop_host, shop_name, token)`
 
 Once this is done, you can use the API calls.
 
