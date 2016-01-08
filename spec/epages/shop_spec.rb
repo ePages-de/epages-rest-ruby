@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe Epages::Shop do
-  let(:shop) { Epages::Shop.new('host','shop', 'token') }
-  let(:other) { Epages::Shop.new('host','other') }
+  let(:shop) { Epages::Shop.new('host', 'shop', 'token') }
+  let(:other) { Epages::Shop.new('host', 'other') }
   it 'attributes' do
     expect(shop.host).to eq 'host'
     expect(shop.name).to eq 'shop'

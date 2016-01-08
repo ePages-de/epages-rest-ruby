@@ -98,14 +98,14 @@ describe 'Epages::REST::Products' do
   describe 'GET#product_stock_level' do
     it 'get the stock level' do
       stock_level = shop.product_stock_level(product)
-      expect(stock_level).to be_a Integer
+      expect(stock_level).to be_a Float
     end
   end
 
   describe 'PUT#product_change_stock_level' do
     it 'change the current stock level' do
       stock_level = shop.product_change_stock_level(product, 1)
-      expect(stock_level).to be_a Integer
+      expect(stock_level).to be_a Float
     end
   end
 

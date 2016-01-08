@@ -85,7 +85,6 @@ module Epages
         perform_request_with_key_and_objects(:post, path, options, key, klass)
       end
 
-      # TODO: refactor code bellow
       # @param path [String]
       # @param options [Hash]
       # @param key [Symbol]
@@ -156,9 +155,15 @@ module Epages
       end
 
       def parse_suggestions_to_products(data)
-        data[:products].collect do |p|
-          id = p[:link][:href].split('/').last
-          product(id)
+        ids = data[:products].collect { |p| p[:link][:href].split('/').last }
+        parallel_calls(product: ids)[:product]
+      end
+
+      def process_thread(key, value, index = nil)
+        Thread.new do
+          Thread.current[:name] = key
+          Thread.current[:index] = index if index
+          Thread.current[:result] = send(key, value)
         end
       end
     end
