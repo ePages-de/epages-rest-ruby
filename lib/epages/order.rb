@@ -16,6 +16,7 @@ module Epages
     attr_reader *KEYS
 
     def initialize(data)
+      DATE_ATTRS.each{ |i| parse_attribute_as(i.to_sym, data.delete(i.camelize(:lower).to_sym), DateTime) }
       parse_attribute_as_array_of(:links, data.delete(:links), Epages::Link)
       parse_attribute_as_array_of(:product_line_items, data.delete(:productLineItems), Epages::ProductLineItem)
       parse_attribute_as(:shipping_price, data.delete(:shippingPrice), Epages::Price)

@@ -36,12 +36,10 @@ describe 'Epages::REST::Orders' do
   end
 
   describe 'PUT#order' do
-    let(:rnd_str) { ('a'..'z').to_a.shuffle.join }
     let(:address) { Epages::Address.new(first_name: 'Domingo', last_name: 'developer', street: 'Fake Street 123', zip_code: '20253', city: 'HH', country: 'DE') }
-    let(:updated_order) { shop.update_order(orders.last.order_id, comment: rnd_str, billing_address: address) }
+    let(:updated_order) { shop.update_order(orders.last.order_id, billing_address: address) }
     it 'update the order' do
       expect(updated_order).to be_a Epages::Order
-      expect(updated_order.comment).to eq rnd_str
       expect(updated_order.billing_address).to be_a Epages::Address
       expect(updated_order.billing_address.first_name).to eq 'Domingo'
       expect(updated_order.billing_address.city).to eq 'HH'

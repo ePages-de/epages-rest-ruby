@@ -166,6 +166,17 @@ module Epages
           Thread.current[:result] = send(key, value)
         end
       end
+
+      def format_date(date)
+        (date.is_a? Date ? date : Date.parse(date)).strftime('%F')
+      end
+
+      def format_sales_options(options)
+        options[:created_before] = format_date(options[:created_before]) if options[:created_before]
+        options[:created_after] = format_date(options[:created_after]) if options[:created_after]
+        options[:product_id] = epages_id(options[:product_id] || options[:product]) if options[:product_id]
+        options
+      end
     end
   end
 end

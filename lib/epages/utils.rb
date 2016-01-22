@@ -13,9 +13,14 @@ module Epages
     # @param name [Symbol] [String]
     # @param data [Hash]
     # @param klass [Class]
-    def parse_attribute_as(name, data, klass = nil)
+    def parse_attribute_as(name, data, klass = NilClass)
       return if data.nil?
-      value = klass.nil? ? data : klass.new(data)
+      value =
+        case klass.name
+        when 'NilClass' then data
+        when 'DateTime' then klass.parse(data)
+        else klass.new(data)
+        end
       instance_variable_set("@#{name.to_s.underscore}", value)
     end
 
