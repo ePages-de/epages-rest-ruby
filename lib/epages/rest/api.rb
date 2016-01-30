@@ -4,6 +4,7 @@ require 'epages/rest/legal'
 require 'epages/rest/miscellaneous'
 require 'epages/rest/orders'
 require 'epages/rest/products'
+require 'epages/rest/sales'
 require 'epages/rest/shipping_methods'
 
 module Epages
@@ -15,6 +16,7 @@ module Epages
       include REST::Miscellaneous
       include REST::Orders
       include REST::Products
+      include REST::Sales
       include REST::ShippingMethods
     end
   end

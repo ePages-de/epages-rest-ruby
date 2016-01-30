@@ -168,7 +168,7 @@ module Epages
       end
 
       def format_date(date)
-        (date.is_a? Date ? date : Date.parse(date)).strftime('%F')
+        (date.is_a?(Date) ? date : DateTime.parse(date)).strftime
       end
 
       def format_sales_options(options)
