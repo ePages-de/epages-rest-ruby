@@ -25,5 +25,7 @@ module Epages
       parse_attribute_as(:line_item_container, data.delete(:lineItemContainer), Epages::LineItemContainer)
       parse_attributes(data)
     end
+
+    alias_method :id, :order_id
   end
 end

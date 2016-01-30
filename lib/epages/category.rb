@@ -21,5 +21,7 @@ module Epages
       return false if other.class != Epages::Category
       category_id == other.category_id && name == other.name
     end
+
+    alias_method :id, :category_id
   end
 end

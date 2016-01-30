@@ -11,5 +11,7 @@ module Epages
     def initialize(data)
       parse_attributes(data)
     end
+
+    alias_method :id, :shipping_method_id
   end
 end

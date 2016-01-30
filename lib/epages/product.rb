@@ -88,5 +88,7 @@ module Epages
     def to_line_item(quantity = 1)
       {productId: product_id, quantity: quantity}
     end
+
+    alias_method :id, :product_id
   end
 end

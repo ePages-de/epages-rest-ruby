@@ -26,5 +26,6 @@ module Epages
     end
 
     alias_method :attributes, :properties
+    alias_method :id, :product_id
   end
 end
