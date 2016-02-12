@@ -11,7 +11,8 @@ module Epages
       #
       # @param options [Hash]
       def sales(options = {})
-        perform_get_with_key_and_objects('/sales', format_sales_options(options), :salesPerCurrency, Epages::Sale)
+        options[:product_id] = epages_id(options[:product_id]) if options[:product_id]
+        perform_get_with_key_and_objects('/sales', format_dates_options(options), :salesPerCurrency, Epages::Sale)
       end
     end
   end

@@ -48,6 +48,23 @@ describe 'Epages::REST::Products' do
     end
   end
 
+  describe 'PATCH#product' do
+    let(:name) { product.name }
+    let(:short_description) { product.short_description }
+    let(:price) { product.price_info.price.amount }
+    it 'removes attributes' do
+      api_product = shop.update_product(product, remove: 'short_description')
+      expect(api_product.short_description).to eq nil
+    end
+
+    it 'assigns attributes' do
+      api_product = shop.update_product(product, name: name, short_description: short_description, "price_info/price/amount": price)
+      expect(api_product.name).to eq name
+      expect(api_product.short_description).to eq short_description
+      expect(api_product.price_info.price.amount).to eq price
+    end
+  end
+
   describe 'GET#product_variations' do
     it 'get the variation' do
       variation = shop.product_variations(product)

@@ -32,6 +32,13 @@ module Epages
       # @param path [String]
       # @param options [Hash]
       # @param klass [Class]
+      def perform_patch_with_object(path, options, klass)
+        perform_request_with_object(:patch, path, options, klass)
+      end
+
+      # @param path [String]
+      # @param options [Hash]
+      # @param klass [Class]
       def perform_delete_with_object(path, options, klass)
         perform_request_with_object(:delete, path, options, klass)
       end
@@ -171,10 +178,9 @@ module Epages
         (date.is_a?(Date) ? date : DateTime.parse(date)).strftime
       end
 
-      def format_sales_options(options)
+      def format_dates_options(options)
         options[:created_before] = format_date(options[:created_before]) if options[:created_before]
         options[:created_after] = format_date(options[:created_after]) if options[:created_after]
-        options[:product_id] = epages_id(options[:product_id] || options[:product]) if options[:product_id]
         options
       end
     end

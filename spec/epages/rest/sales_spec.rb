@@ -10,14 +10,14 @@ describe 'Epages::REST::Sales' do
 
   describe 'GET#Sales' do
     let(:shop_sales) { shop.sales }
-    let(:shop_sales_options) { shop.sales created_after: '28-01-2016', product: product }
+    let(:shop_sales_options) { shop.sales created_after: '28-01-2016', product_id: product }
 
     it 'get an array of sales' do
       shop_sales.each { |p| expect(p).to be_a Epages::Sale }
     end
 
     it 'with parameters' do
-      expect(shop_sales_options.size).to eq 2
+      expect(shop_sales_options.size).to eq 1
     end
   end
 end

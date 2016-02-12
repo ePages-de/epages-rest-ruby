@@ -24,6 +24,16 @@ module Epages
         perform_get_with_object("/products/#{id}", options, Epages::Product)
       end
 
+      # call the API and return a Epages::Product
+      # implements the call https://developer.epages.com/apps/api-reference/patch-shops-shopid-products-productid.html
+      #
+      # @param product [String], [Epages::Product]
+      # @param options [Hash]
+      def update_product(product, options = {})
+        id = epages_id(product)
+        perform_patch_with_object("/products/#{id}", options, Epages::Product)
+      end
+
       # call the API and return a Hash with the respective variation_attributes and the variation products
       # implements the call https://developer.epages.com/apps/api-reference/get-shops-shopid-products-productid-variations.html
       #

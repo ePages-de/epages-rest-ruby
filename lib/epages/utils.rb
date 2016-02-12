@@ -49,7 +49,7 @@ module Epages
 
     # return the hash with the keys converted to lower camelcase
     #
-    # @param data [Hash]
+    # @param hash [Hash]
     def camelize_keys(hash)
       hash.keys.each do |k|
         key = k.to_s.camelize(:lower).to_sym
@@ -61,7 +61,7 @@ module Epages
 
     # return the hash with the keys converted to underscore
     #
-    # @param data [Hash]
+    # @param hash [Hash]
     def underscorize_keys(hash)
       hash.keys.each do |k|
         key = k.to_s.underscore.to_sym
@@ -78,6 +78,8 @@ module Epages
     end
 
     # returns the object replacing all the keys as symbols
+    #
+    # @param object [Hash], [Array]
     def symbolize_keys!(object)
       if object.is_a?(Array)
         object.each_with_index { |val, index| object[index] = symbolize_keys!(val) }
@@ -85,6 +87,23 @@ module Epages
         object.keys.each { |key| object[key.to_sym] = symbolize_keys!(object.delete(key)) }
       end
       object
+    end
+
+    # returns the json body for the patch calls
+    #
+    # @param options [Hash]
+    def options_to_patch_request(options)
+      json = []
+      Array[options.delete(:remove)].flatten.compact.each { |i| json << {op: 'remove', path: "/#{camelize_words(i)}"} }
+      options.each { |k, v| json << {'op': 'add', 'path': "/#{camelize_words(k)}", 'value': v} }
+      json.collect { |i| Hash[i.each_pair.to_a] }
+    end
+
+    # return the string passed as a parameter with all the words camelized
+    #
+    # @param string [Strimg], [Symbol]
+    def camelize_words(string)
+      string.to_s.gsub(/(\w+)/) { |s| s.camelize(:lower) }
     end
   end
 end

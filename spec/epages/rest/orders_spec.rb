@@ -11,7 +11,7 @@ describe 'Epages::REST::Orders' do
   let(:orders) { json_orders.collect { |p| Epages::Order.new(Epages::Utils.symbolize_keys!(p)) } }
   let(:order) { orders.last }
 
-  let(:options) { {viewed_on: true} }
+  let(:options) { {viewed_on: true, created_before: Date.today} }
 
   describe 'GET#orders' do
     let(:shop_orders) { shop.orders }
@@ -24,6 +24,7 @@ describe 'Epages::REST::Orders' do
     it 'get the proper orders when options are passed' do
       shop_orders_options.each do |o|
         expect(o.viewed_on).to_not eq nil
+        expect(o.creation_date).to be < Date.today
       end
     end
   end

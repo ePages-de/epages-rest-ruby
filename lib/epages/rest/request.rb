@@ -16,9 +16,9 @@ module Epages
       end
 
       def set_options(method, options)
-        @options = camelize_keys(options)
+        @options = method == :patch ? options_to_patch_request(options).to_json : camelize_keys(options)
         @request_method = method
-        @headers = request_headers
+        @headers = request_headers(method)
       end
 
       def auth_token
@@ -27,14 +27,18 @@ module Epages
 
       # @return [Array, Hash]
       def perform
-        options_key = @request_method == :get ? :params : :json
+        options_key = case @request_method
+                      when :get   then :params
+                      when :patch then :body
+                      else :json
+                      end
         response = HTTP.with(@headers).public_send(@request_method, @uri.to_s, options_key => @options)
         fail_or_return_response_body(response)
       end
 
-      def request_headers
+      def request_headers(method)
         headers = {}
-        headers['Content-Type']  = 'application/json'
+        headers['Content-Type']  = method == :patch ? 'application/json-patch+json' : 'application/json'
         headers['Accept']        = '*/*'
         headers['Authorization'] = auth_token if @shop.token?
         headers

@@ -40,6 +40,13 @@ using_id = shop.product("561E0DA0-91C0-4D12-79C6-D5809AB3231B")
 using_product = shop.product(products.first)
 ```
 
+## [Update Product](https://developer.epages.com/apps/api-reference/patch-shops-shopid-products-productid.html)
+
+You can update the attributes of a single product **using the id** of the product **or a instance of Epages::Product** and a Hash of attributes to add or replace the attribute value or an Array indicating the attributes to be removed.
+```
+updated_product = shop.update_product(product, name: 'This is the new name', short_description: 'New short description', remove: ['manufacturer', 'upc', 'ean'])
+``
+
 ## [Variations of a product](https://developer.epages.com/apps/api-reference/get-shops-shopid-products-productid-variations.html)
 
 This call is used to get all the variations of a product, for example variations in sizes or colors. To get this variations:
