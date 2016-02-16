@@ -4,10 +4,11 @@ module Epages
   class ImageSize
     include Epages::Utils
 
-    attr_accessor :images
+    attr_accessor :images, :name
 
     def initialize(data)
-      parse_attribute_as_array_of(:images, data[:sizes], Epages::Image)
+      parse_attribute_as_array_of(:images, data.delete(:sizes), Epages::Image)
+      parse_attributes(data)
     end
 
     # return a sorted array with the name of all available sizes
@@ -21,6 +22,11 @@ module Epages
     def size_link(size)
       link = images.find { |i| i.classifier == size }
       link ? link.url : nil
+    end
+
+    # return the length of the slideshow
+    def length
+      images.size
     end
   end
 end

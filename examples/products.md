@@ -11,6 +11,10 @@ Between these methods are:
  * **links_title**: give you the full list of additional information that you can get from the API. 
  * **link?**(link_name): returns you if the product has the link [link_name] as additional information.
  * **slideshow**: if the product has the link to the slideshow call, this method do the respective call to the API and retrieve the information.
+ * **add_slideshow_image**: add an image to the slideshow, this method do the respective call to the API and retrieve the information.
+ * **delete_slideshow_image**: removes an image from the slideshow and return the new slideshow, this method do the respective call to the API and retrieve the information.
+ * **slideshow_sequence**: get the current slideshow sequence of images, this method do the respective call to the API and retrieve the information.
+ * **update_slideshow_sequence**: update the sequence order of the slideshow and returns the new one. This method do the respective call to the API and retrieve the information.
  * **variations**: if the product has the link to the variations call, this method do the respective call to the API and retrieve the information.
  * **custom_attributes**: if the product has the link to the custom-attributes call, this method do the respective call to the API and retrieve the information.
  * **categories**: if the product has the link to the categories call, this method do the respective call to the API and retrieve the information.
@@ -77,6 +81,38 @@ This call returns an array of [Epages::ImageSize].
 This class defines at the same time a list of [Epages::Image] in different sizes and provides the next methods:
  * **sizes**: returns the list of the available sizes.
  * **size_link**(size): return the url of the link with the size passed as a parameter.
+ 
+##[Add image to slideshow](https://developer.epages.com/apps/api-reference/post-shops-shopid-products-productid-slideshow.html)
+
+This call is uded to add a new image to the slideshow of a product.
+```
+shop.product_add_slideshow_image(product, 'path/to/image.jpg')
+product.add_slideshow_image('path/to/image.jpg')
+```
+
+##[Delete image from slideshow](https://developer.epages.com/apps/api-reference/delete-shops-shopid-products-productid-slideshow-imagename.html)
+
+This call is uded to delete an image from the slideshow of a product.
+```
+shop.product_delete_slideshow_image(product, 'image.jpg')
+product.delete_slideshow_image('image.jpg')
+```
+
+##[Slideshow sequence](https://developer.epages.com/apps/api-reference/get-shops-shopid-products-productid-slideshow-sequence.html)
+
+This call is uded to get the slideshow sequence of images.
+```
+shop.product_slideshow_sequence
+product.slideshow_sequence
+```
+
+##[Update slideshow sequence](https://developer.epages.com/apps/api-reference/put-shops-shopid-products-productid-slideshow-sequence.html)
+
+This call is uded to change the order of the slideshow sequence.
+```
+shop.product_update_slideshow_sequence(["new", "sequence", "of", "images"])
+product.update_slideshow_sequence(["new", "sequence", "of", "images"])
+```
 
 ## [Custom Attributes of a product](https://developer.epages.com/apps/api-reference/get-shops-shopid-products-productid-custom-attributes.html)
 

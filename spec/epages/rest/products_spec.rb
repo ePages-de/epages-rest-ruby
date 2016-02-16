@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe 'Epages::REST::Products' do
   let(:token) { ENV['shop_token'] || IO.read('spec/fixtures/token.txt') }
@@ -17,6 +18,7 @@ describe 'Epages::REST::Products' do
   let(:lowest_price_product) { products.find { |p| p.link?('lowest-price') } }
 
   let(:options) { {resultsPerPage: 1} }
+  let(:sequence) { shop.product_slideshow_sequence(slideshow_product) }
 
   describe 'GET#products' do
     let(:shop_products) { shop.products }
@@ -84,6 +86,36 @@ describe 'Epages::REST::Products' do
 
     it 'raises error if the product has no slideshow' do
       expect { shop.product_slideshow(no_slideshow_product) }.to raise_error(Epages::Error::NotFound)
+    end
+  end
+
+  describe 'POST#slideshow_image' do
+    it 'post a new image' do
+      slideshow = shop.product_add_slideshow_image(slideshow_product, 'spec/fixtures/nyan.png')
+      expect(slideshow.name).to eq 'nyan.png'
+    end
+  end
+
+  describe 'DELETE#slideshow_image' do
+    it 'delete a image' do
+      slideshow = shop.product_delete_slideshow_image(slideshow_product, 'nyan.png')
+      expect(slideshow).to eq nil # the response throws a HTTP: 204 but without any body, otherwise error
+    end
+  end
+
+  describe 'GET#product_slideshow_sequence' do
+    it 'get the sequence' do
+      sequence = shop.product_slideshow_sequence(slideshow_product)
+      expect(sequence).to be_a Array
+    end
+  end
+
+  describe 'PUT#product_slideshow_sequence' do
+    it 'put the new sequence' do
+      new_sequence = shop.product_update_slideshow_sequence(slideshow_product, sequence.rotate)
+      expect(new_sequence).to be_a Array
+      expect(new_sequence).to eq sequence.rotate
+      shop.product_update_slideshow_sequence(slideshow_product, sequence)
     end
   end
 

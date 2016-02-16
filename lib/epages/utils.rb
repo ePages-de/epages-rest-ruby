@@ -99,6 +99,15 @@ module Epages
       json.collect { |i| Hash[i.each_pair.to_a] }
     end
 
+    # returns the json body for the patch calls
+    #
+    # @param options [Hash]
+    def options_to_multipart_request(options)
+      file = options[:file]
+      @request_method = :post
+      {image: HTTP::FormData::File.new(file, filename: File.basename(file), mime_type: mime_type(File.basename(file)))}
+    end
+
     # return the string passed as a parameter with all the words camelized
     #
     # @param string [Strimg], [Symbol]

@@ -54,6 +54,45 @@ module Epages
         perform_get_with_key_and_objects("/products/#{id}/slideshow", {}, :items, Epages::ImageSize)
       end
 
+      # call the API to post a new image to the slideshow of a product and return an array of Epages::ImageSize (slides) of the product
+      # implements the call https://developer.epages.com/apps/api-reference/post-shops-shopid-products-productid-slideshow.html
+      #
+      # @param product [String], [Epages::Product]
+      # @param image [String]
+      def product_add_slideshow_image(product, image)
+        id = epages_id(product)
+        perform_multipart_post_with_objects("/products/#{id}/slideshow", image, Epages::ImageSize)
+      end
+
+      # call the API to delete an image from the slideshow of a product
+      # implements the call https://developer.epages.com/apps/api-reference/delete-shops-shopid-products-productid-slideshow-imagename.html
+      #
+      # @param product [String], [Epages::Product]
+      # @param image [String]
+      def product_delete_slideshow_image(product, image)
+        id = epages_id(product)
+        perform_delete_request("/products/#{id}/slideshow/#{image.to_s}")
+      end
+
+      # call the API to get the slideshow sequence of a product
+      # implements the call https://developer.epages.com/apps/api-reference/get-shops-shopid-products-productid-slideshow-sequence.html
+      #
+      # @param product [String], [Epages::Product]
+      def product_slideshow_sequence(product)
+        id = epages_id(product)
+        perform_get_request("/products/#{id}/slideshow/sequence", {})
+      end
+
+      # call the API to update the slideshow sequence of a product
+      # implements the call https://developer.epages.com/apps/api-reference/put-shops-shopid-products-productid-slideshow-sequence.html
+      #
+      # @param product [String], [Epages::Product]
+      # @param data [Array]
+      def product_update_slideshow_sequence(product, data)
+        id = epages_id(product)
+        perform_put_request("/products/#{id}/slideshow/sequence", data)
+      end
+
       # call the API and return an array of Epages::CustomAttribute of the product
       # implements the call https://developer.epages.com/apps/api-reference/get-shops-shopid-products-productid-custom-attributes.html
       #

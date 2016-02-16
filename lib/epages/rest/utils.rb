@@ -66,6 +66,14 @@ module Epages
         perform_request_with_objects(:post, path, options, klass)
       end
 
+      # @param path [String]
+      # @param options [Hash]
+      # @param klass [Class]
+      def perform_multipart_post_with_objects(path, image, klass)
+        response = perform_request(:multipart_post, path, {file: image})
+        response.has_key?('items') ? response[:items].collect { |data| klass.new(data) } : klass.new(response)
+      end
+
       # @param request_method [Symbol]
       # @param path [String]
       # @param options [Hash]
@@ -104,14 +112,20 @@ module Epages
 
       # @param path [String]
       # @param options [Hash]
-      def perform_get_request(path, options)
+      def perform_get_request(path, options = {})
         perform_request(:get, path, options)
       end
 
       # @param path [String]
       # @param options [Hash]
-      def perform_put_request(path, options)
+      def perform_put_request(path, options = {})
         perform_request(:put, path, options)
+      end
+
+      # @param path [String]
+      # @param options [Hash]
+      def perform_delete_request(path, options = {})
+        perform_request(:delete, path, options)
       end
 
       def epages_id(object)
