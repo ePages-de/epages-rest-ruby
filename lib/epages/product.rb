@@ -8,7 +8,7 @@ module Epages
 
     KEYS = %w(product_id name short_description description images price_info for_sale special_offer delivery_weight
               shipping_methods_restricted_to availability_text availability energy_labels_string energy_label_source_file
-              product_data_sheet sf_url product_number manufacturer upc ean links).collect(&:to_sym).freeze
+              product_data_sheet sf_url product_number manufacturer upc ean links product_image).collect(&:to_sym).freeze
 
     attr_reader *KEYS
 
@@ -49,6 +49,32 @@ module Epages
     # returns the list of slides of the product
     def slideshow
       product_slideshow(self) if link?('slideshow')
+    end
+
+    # add an image to the slideshow
+    #
+    # @param image [String]
+    def add_slideshow_image(image)
+      product_add_slideshow_image(self, image)
+    end
+
+    # remove the image passed from the slideshow and return the new slideshow
+    #
+    # @param image [String]
+    def delete_slideshow_image(image)
+      product_delete_slideshow_image(self, image)
+    end
+
+    # returns an array containing the slideshow sequence
+    def slideshow_sequence
+      product_slideshow_sequence(self)
+    end
+
+    # updates the order of the sequence with the data passed as parameter
+    #
+    # @param data [Array]
+    def update_slideshow_sequence(data)
+      product_update_slideshow_sequence(self, data)
     end
 
     # returns the list of variations of the product

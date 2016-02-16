@@ -9,7 +9,8 @@ module Epages
                     cancelled_on closed_on paid_on returned_on)
 
     ATTRS = %w(order_id order_number billing_address shipping_address customer_id locale currency_id tax_model
-               grand_total total_before_tax comment line_item_container product_line_items shipping_price links)
+               grand_total total_before_tax line_item_container product_line_items shipping_price links internal_note
+               customer_comment shipping_data payment_data)
 
     KEYS = (ATTRS + DATE_ATTRS).collect(&:to_sym).freeze
 
@@ -23,6 +24,8 @@ module Epages
       parse_attribute_as(:billing_address, data.delete(:billingAddress), Epages::Address)
       parse_attribute_as(:shipping_address, data.delete(:shippingAddress), Epages::Address)
       parse_attribute_as(:line_item_container, data.delete(:lineItemContainer), Epages::LineItemContainer)
+      parse_attribute_as(:shipping_data, data.delete(:shippingData), Epages::ShippingData)
+      parse_attribute_as(:payment_data, data.delete(:paymentData), Epages::PaymentData)
       parse_attributes(data)
     end
 
