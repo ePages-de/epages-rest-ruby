@@ -59,7 +59,7 @@ describe 'Epages::REST::Products' do
     end
 
     it 'assigns attributes' do
-      api_product = shop.update_product(product, 'name' => name, 'short_description' => short_description, "price_info/price/amount" => price)
+      api_product = shop.update_product(product, 'name' => name, 'short_description' => short_description, 'price_info/price/amount' => price)
       expect(api_product.name).to eq name
       expect(api_product.short_description).to eq short_description
       expect(api_product.price_info.price.amount).to eq price

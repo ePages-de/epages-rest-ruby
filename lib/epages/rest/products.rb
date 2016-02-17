@@ -71,7 +71,7 @@ module Epages
       # @param image [String]
       def product_delete_slideshow_image(product, image)
         id = epages_id(product)
-        perform_delete_request("/products/#{id}/slideshow/#{image.to_s}")
+        perform_delete_request("/products/#{id}/slideshow/#{image}")
       end
 
       # call the API to get the slideshow sequence of a product

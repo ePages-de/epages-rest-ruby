@@ -70,8 +70,8 @@ module Epages
       # @param options [Hash]
       # @param klass [Class]
       def perform_multipart_post_with_objects(path, image, klass)
-        response = perform_request(:multipart_post, path, {file: image})
-        response.has_key?('items') ? response[:items].collect { |data| klass.new(data) } : klass.new(response)
+        response = perform_request(:multipart_post, path, file: image)
+        response.key?('items') ? response[:items].collect { |data| klass.new(data) } : klass.new(response)
       end
 
       # @param request_method [Symbol]
