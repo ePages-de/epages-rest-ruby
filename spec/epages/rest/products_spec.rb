@@ -86,14 +86,14 @@ describe 'Epages::REST::Products' do
 
   describe 'POST#slideshow_image' do
     it 'post a new image' do
-      slideshow = shop.product_add_slideshow_image(slideshow_product, 'spec/fixtures/nyan.png')
-      expect(slideshow.name).to eq 'nyan.png'
+      slideshow = shop.product_add_slideshow_image(slideshow_product, 'spec/fixtures/nyan_cat.png')
+      expect(slideshow.name).to eq 'nyan_cat.png'
     end
   end
 
   describe 'DELETE#slideshow_image' do
     it 'delete a image' do
-      slideshow = shop.product_delete_slideshow_image(slideshow_product, 'nyan.png')
+      slideshow = shop.product_delete_slideshow_image(slideshow_product, 'nyan_cat.png')
       expect(slideshow).to eq nil # the response throws a HTTP: 204 but without any body, otherwise error
     end
   end
