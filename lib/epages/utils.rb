@@ -51,6 +51,7 @@ module Epages
     #
     # @param hash [Hash]
     def camelize_keys(hash)
+      return unless hash.is_a?(Hash)
       hash.keys.each do |k|
         key = k.to_s.camelize(:lower).to_sym
         hash[key] = hash[k]
@@ -63,6 +64,7 @@ module Epages
     #
     # @param hash [Hash]
     def underscorize_keys(hash)
+      return unless hash.is_a?(Hash)
       hash.keys.each do |k|
         key = k.to_s.underscore.to_sym
         hash[key] = hash[k]

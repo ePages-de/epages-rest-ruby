@@ -17,8 +17,8 @@ module Epages
 
       def set_request_options(method, options)
         @request_method = method
-        @options = set_options(options)
         @headers = request_headers
+        @options = set_options(options)
       end
 
       def auth_token
@@ -33,14 +33,14 @@ module Epages
 
       def request_headers
         headers = {}
-        headers['Content-Type']  = content_type_options unless @options[:image].is_a?(HTTP::FormData::File)
+        headers['Content-Type']  = content_type_options unless @request_method == :multipart_post
         headers['Accept']        = '*/*'
         headers['Authorization'] = auth_token if @shop.token?
         headers
       end
 
       def options_passed_by
-        return :form if @options[:image].is_a?(HTTP::FormData::File)
+        return :form if @request_method == :post && @options.has_key?(:image)
         case @request_method
         when :get   then :params
         when :patch then :body
@@ -56,9 +56,8 @@ module Epages
         case @request_method
         when :multipart_post then options_to_multipart_request(options)
         when :patch then options_to_patch_request(options).to_json
-        else camelize_keys(options)
+        else options.is_a?(Hash) ? camelize_keys(options) : options
         end
-        # @request_method = :post if @request_method == :multipart_post
       end
 
       def mime_type(basename)
@@ -75,7 +74,7 @@ module Epages
         if response.code.between?(200, 206)
           symbolize_keys!(response.parse)
         else
-          fail Epages::Error::ERRORS[response.code], JSON.parse(response.body.to_s)['message']
+          fail Epages::Error::ERRORS[response.code], response.body.to_s
         end
       end
     end

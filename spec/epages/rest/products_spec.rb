@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pry'
 
 describe 'Epages::REST::Products' do
   let(:token) { ENV['shop_token'] || IO.read('spec/fixtures/token.txt') }
@@ -82,10 +81,6 @@ describe 'Epages::REST::Products' do
         expect(i).to be_a Epages::ImageSize
         i.images.each { |s| expect(s).to be_a Epages::Image }
       end
-    end
-
-    it 'raises error if the product has no slideshow' do
-      expect { shop.product_slideshow(no_slideshow_product) }.to raise_error(Epages::Error::NotFound)
     end
   end
 
