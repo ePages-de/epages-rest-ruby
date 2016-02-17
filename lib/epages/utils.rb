@@ -96,8 +96,8 @@ module Epages
     # @param options [Hash]
     def options_to_patch_request(options)
       json = []
-      Array[options.delete(:remove)].flatten.compact.each { |i| json << {op: 'remove', path: "/#{camelize_words(i)}"} }
-      options.each { |k, v| json << {'op': 'add', 'path': "/#{camelize_words(k)}", 'value': v} }
+      Array[options.delete(:remove)].flatten.compact.each { |i| json << {'op' => 'remove', 'path' => "/#{camelize_words(i)}"} }
+      options.each { |k, v| json << {'op' => 'add', 'path' => "/#{camelize_words(k)}", 'value' => v} }
       json.collect { |i| Hash[i.each_pair.to_a] }
     end
 
