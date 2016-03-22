@@ -28,6 +28,8 @@ You can get any public information of any shop indicating only the name of the s
 The first thing is create your REST shop.
 `shop = Epages::REST::Shop.new(shop_host, shop_name)` or `shop = Epages::REST::Shop.new(shop_host, shop_name, token)`
 
+Additionally, you can indicate if your shop uses https or not (default true) `shop = Epages::REST::Shop.new(shop_host, shop_name, token, https: false)`
+
 Once this is done, you can use the API calls.
 
 #### [Get products](https://developer.epages.com/apps/api-reference/get-shops-shopid-products.html)

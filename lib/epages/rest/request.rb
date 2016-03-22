@@ -10,7 +10,7 @@ module Epages
 
       def initialize(object, request_method, path, options = {})
         @shop = build_shop_from(object)
-        @uri = URI.parse("https://#{@shop.host}/rs/shops/#{@shop.name.to_s + path}")
+        @uri = URI.parse("#{@shop.protocol}://#{@shop.host}/rs/shops/#{@shop.name.to_s + path}")
         @path = uri.path
         set_request_options(request_method, options)
       end

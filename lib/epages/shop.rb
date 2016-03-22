@@ -4,10 +4,11 @@ module Epages
   class Shop
     attr_accessor :host, :name, :token
 
-    def initialize(host, name, token = nil)
+    def initialize(host, name, token = nil, options = { https: true })
       @host = host
       @name = name
       @token = token
+      @protocol = options[:https] ? 'https' : 'http'
     end
 
     # return the shop name
