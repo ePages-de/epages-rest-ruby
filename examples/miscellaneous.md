@@ -2,6 +2,15 @@
 
 This example assumes you have configured the `shop` correctly.
 
+## [Basic Information](https://developer.epages.com/apps/api-reference/get-shops-shopid.html)
+
+Retrieve the basic information of a shop. Returns a Hash with the keys: name, logo_url, sf_url, mbo_url
+
+```
+basic_info = shop.info
+german_info = shop.info(locale: 'de_DE')
+```
+
 ## [Currencies](https://developer.epages.com/apps/api-reference/get-shops-shopid-currencies.html)
 
 Retrieve the currency information of a shop. Returns a Hash with the keys:

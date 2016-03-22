@@ -1,9 +1,14 @@
 ## 1.0.5
+
+ * New Calls:
+    
+    * Epages::REST::Shop#`info`
  
  * Other changes:
  
     * shop can receive an additional boolean attribute `https` to support https and http. Default to true.  
-
+    * renamed attribute `cancelled_on` to `rejected_on` and attribute `shipped_on` to `delivered_on` within orders
+    
 ## 1.0.4
 
  * New Calls:
@@ -19,7 +24,7 @@
  * Other changes:
     
     * new attributes `shipping_data` and `payment_data` to orders
-    * replaced attribute `comment` with `ustomer_comment` and `internal_note`
+    * replaced attribute `comment` with `customer_comment` and `internal_note`
     * added range filters `crated_before` and `created_after` to orders
     * dates and are interpreted as Datetime, before was String
     

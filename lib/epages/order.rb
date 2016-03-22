@@ -5,12 +5,12 @@ module Epages
   class Order
     include Epages::Utils
 
-    DATE_ATTRS = %w(creation_date invoiced_on shipped_on pending_on archived_on dispatched_on viewed_on
-                    cancelled_on closed_on paid_on returned_on)
+    DATE_ATTRS = %w(creation_date invoiced_on delivered_on pending_on archived_on dispatched_on viewed_on
+                    rejected_on closed_on paid_on returned_on)
 
     ATTRS = %w(order_id order_number billing_address shipping_address customer_id locale currency_id tax_model
                grand_total total_before_tax line_item_container product_line_items shipping_price links internal_note
-               customer_comment shipping_data payment_data)
+               customer_comment customer_number shipping_data payment_data)
 
     KEYS = (ATTRS + DATE_ATTRS).collect(&:to_sym).freeze
 

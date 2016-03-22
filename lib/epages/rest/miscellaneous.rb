@@ -7,6 +7,12 @@ module Epages
     module Miscellaneous
       include Epages::Utils
 
+      # implements the cal https://developer.epages.com/apps/api-reference/get-shops-shopid.html
+      def info(options = {})
+        response = perform_get_request('/', options)
+        underscorize_keys(response)
+      end
+
       # implements the call https://developer.epages.com/apps/api-reference/get-shops-shopid-locales.html
       def locales
         perform_get_request('/locales', {})

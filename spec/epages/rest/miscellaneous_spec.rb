@@ -10,6 +10,17 @@ describe 'Epages::REST::Miscellaneous' do
   let(:json_products) { JSON.parse(File.read('spec/fixtures/products.json'))['items'] }
   let(:products) { json_products.collect { |p| Epages::Product.new(Epages::Utils.symbolize_keys!(p)) } }
 
+  describe 'GET#info' do
+    let(:shop_info) { shop.info }
+    it 'get the correct response' do
+      expect(shop_info).to be_a Hash
+      expect(shop_info).to have_key(:name)
+      expect(shop_info).to have_key(:logo_url)
+      expect(shop_info).to have_key(:sf_url)
+      expect(shop_info).to have_key(:mbo_url)
+    end
+  end
+
   describe 'GET#locales' do
     let(:shop_locales) { shop.locales }
     it 'get the correct response' do
