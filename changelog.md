@@ -3,6 +3,7 @@
  * New Calls:
     
     * Epages::REST::Shop#`info`
+    * Epages::REST::Shop#`updated_products_by_property`
  
  * Other changes:
  

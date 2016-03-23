@@ -6,16 +6,16 @@ module Epages
     include Epages::Utils
     include Epages::REST::Products
 
-    KEYS = %w(product_id name short_description description images price_info for_sale special_offer delivery_weight
+    KEYS = %w(product_id name short_description description product_image images price_info for_sale special_offer delivery_weight
               shipping_methods_restricted_to availability_text availability energy_labels_string energy_label_source_file
-              product_data_sheet sf_url product_number manufacturer upc ean links product_image).collect(&:to_sym).freeze
+              product_data_sheet sf_url product_number manufacturer upc ean essential_features search_keywords links).collect(&:to_sym).freeze
 
     attr_reader *KEYS
 
     def initialize(data)
       parse_attribute_as_array_of(:images, data.delete(:images), Epages::Image)
       parse_attribute_as_array_of(:links, data.delete(:links), Epages::Link)
-      parse_attribute_as(:priceInfo, data.delete(:priceInfo), Epages::PriceInfo)
+      parse_attribute_as(:price_info, data.delete(:priceInfo), Epages::PriceInfo)
       parse_attributes(data)
     end
 

@@ -163,6 +163,13 @@ describe 'Epages::REST::Products' do
     end
   end
 
+  describe 'GET#updated_products_by_property' do
+    let(:sales) { shop.updated_products_by_property(:stocklevel, changed_after: Date.today.prev_day.to_datetime.to_s) }
+    it 'get the array of products' do
+      sales.each { |p| expect(p).to be_a Epages::Product }
+    end
+  end
+
   # TODO: needed a specific app not launched yet
   #
   # describe 'GET#export_products' do

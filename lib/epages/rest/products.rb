@@ -143,6 +143,16 @@ module Epages
         perform_put_request("/products/#{id}/stock-level", changeStocklevel: units)[:stocklevel]
       end
 
+      # call the API and return an array of Epages::Product with updated attribute
+      # implements the call https://developer.epages.com/apps/api-reference/get-shops-shopid-products-updated-productproperty.html
+      #
+      # @param property [String], [Symbol]
+      # @param options [Hash]
+      def updated_products_by_property(property, options = {})
+        res = perform_get_request("/products/updated/#{property.to_s.camelize(:lower)}", options)
+        res[:items].collect { |i| Epages::Product.new(i[:item]) }
+      end
+
       # call the API and return a CSV with the proper data of the products
       # implements the call https://developer.epages.com/apps/api-reference/get-shops-shopid-products-export.html
       #

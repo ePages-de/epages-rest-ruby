@@ -168,5 +168,15 @@ new_stock = product.change_stock_level(1, shop) # the token to allow you to acce
 
 This call return a Integer number referring to the new stock.
 
+## [Updated products by property](https://developer.epages.com/apps/api-reference/get-shops-shopid-products-updated-productproperty.html)
+
+Returns all updated products together with the time of their last update.
+```
+stock_changes = shop.updated_products_by_property(:stocklevel)
+yesterday = Date.today.prev_day.to_datetime.to_s # without activesupport / rails
+yesterday = 1.day.ago.to_s # with activesupport / rails
+yesterday_stock_changes = shop.updated_products_by_property(:stocklevel, changed_after: yesterday)
+```
+
 
 
