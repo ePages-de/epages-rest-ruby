@@ -1,6 +1,4 @@
 require 'spec_helper'
-require 'fileutils'
-require 'pathname'
 
 describe 'Epages::REST::Products' do
   let(:token) { ENV['shop_token'] || IO.read('spec/fixtures/token.txt') }
@@ -87,23 +85,15 @@ describe 'Epages::REST::Products' do
   end
 
   describe 'POST#slideshow_image' do
-    # in order to prevent the taken name error, rename the file to a random string
-    before do
-      @rand_str = (0...8).map { (65 + rand(26)).chr }.join << '.png'
-      Pathname.glob('spec/fixtures/*.png').each { |f| FileUtils.mv f, "#{f.dirname}/#{@rand_str}" }
-    end
     it 'post a new image' do
-      slideshow = shop.product_add_slideshow_image(slideshow_product, "spec/fixtures/#{@rand_str}")
-      expect(slideshow.name).to eq @rand_str
+      slideshow = shop.product_add_slideshow_image(slideshow_product, 'spec/fixtures/test.png')
+      expect(slideshow.name).to eq 'test.png'
     end
   end
 
   describe 'DELETE#slideshow_image' do
-    before do
-      @rand_str = Dir.entries('spec/fixtures/').find { |e| e =~ /(\w+).png/ }
-    end
     it 'delete a image' do
-      slideshow = shop.product_delete_slideshow_image(slideshow_product, @rand_str)
+      slideshow = shop.product_delete_slideshow_image(slideshow_product, 'test.png')
       expect(slideshow).to eq nil # the response throws a HTTP: 204 but without any body, otherwise error
     end
   end

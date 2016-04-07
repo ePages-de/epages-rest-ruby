@@ -38,5 +38,4 @@ tmp/*
 spec/fixtures/token.txt
 spec/fixtures/shop_host.txt
 spec/fixtures/shop_name.txt
-spec/fixtures/*.png
 *.gem
