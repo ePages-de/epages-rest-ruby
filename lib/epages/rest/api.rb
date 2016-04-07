@@ -1,5 +1,6 @@
 require 'epages/rest/carts'
 require 'epages/rest/categories'
+require 'epages/rest/customers'
 require 'epages/rest/legal'
 require 'epages/rest/miscellaneous'
 require 'epages/rest/orders'
@@ -12,6 +13,7 @@ module Epages
     module API
       include REST::Carts
       include REST::Categories
+      include REST::Customers
       include REST::Legal
       include REST::Miscellaneous
       include REST::Orders

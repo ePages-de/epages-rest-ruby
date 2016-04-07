@@ -131,7 +131,7 @@ module Epages
       def epages_id(object)
         return object if object.class == String
         return if object.class.name.deconstantize != 'Epages'
-        object.send("#{object.class.name.demodulize.downcase}_id")
+        object.send(:id)
       end
 
       def parse_product_variations(data)

@@ -4,6 +4,9 @@
     
     * Epages::REST::Shop#`info`
     * Epages::REST::Shop#`updated_products_by_property`
+    * Epages::REST::Shop#`create_customer`
+    * Epages::REST::Shop#`customer`
+    * Epages::REST::Shop#`update_customer`
  
  * Other changes:
  
