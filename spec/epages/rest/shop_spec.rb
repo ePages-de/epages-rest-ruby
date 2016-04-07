@@ -1,12 +1,13 @@
 require 'spec_helper'
 
 describe 'Epages::REST::Shop' do
-  describe '#parallel_calls' do
-    let(:token) { ENV['shop_token'] || IO.read('spec/fixtures/token.txt') }
-    let(:shop_name) { ENV['shop_name'] || IO.read('spec/fixtures/shop_name.txt') }
-    let(:shop_host) { ENV['shop_host'] || IO.read('spec/fixtures/shop_host.txt') }
-    let(:shop) { Epages::REST::Shop.new(shop_host, shop_name, token) }
+  let(:token) { ENV['shop_token'] || IO.read('spec/fixtures/token.txt') }
+  let(:shop_name) { ENV['shop_name'] || IO.read('spec/fixtures/shop_name.txt') }
+  let(:shop_host) { ENV['shop_host'] || IO.read('spec/fixtures/shop_host.txt') }
+  let(:shop) { Epages::REST::Shop.new(shop_host, shop_name, token) }
+  let(:unsecure_shop) { Epages::REST::Shop.new(shop_host, shop_name, token, https: false) }
 
+  describe '#parallel_calls' do
     it 'different requests' do
       requests = {
         products: {},
@@ -28,6 +29,16 @@ describe 'Epages::REST::Shop' do
       response = shop.parallel_calls(requests)
       expect(response[:products][0].size).to eq 2
       expect(response[:products][1].size).to eq 1
+    end
+  end
+
+  describe 'shop generation' do
+    it 'generates a non https shop' do
+      expect(unsecure_shop.protocol).to eq 'http'
+    end
+
+    it 'generates a https shop' do
+      expect(shop.protocol).to eq 'https'
     end
   end
 end

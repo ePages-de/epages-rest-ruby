@@ -2,7 +2,7 @@ require 'epages/error'
 
 module Epages
   class Shop
-    attr_accessor :host, :name, :token, :protocol
+    attr_reader :host, :name, :token, :protocol
 
     def initialize(host, name, token = nil, options = { https: true })
       @host = host
