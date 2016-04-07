@@ -18,11 +18,17 @@ module Epages
       end
 
       # implements the calls in https://developer.epages.com/apps/api-reference/put-shops-shopid-orders-orderid.html
-      def update_order(order, options, locale = 'en_GB')
+      def modify_order(order, options, locale = 'en_GB')
         options.each { |k, v| options[k] = v.to_json if v.class.name.deconstantize == 'Epages' }
         id = epages_id(order)
         old_order = perform_get_request("/orders/#{id}", locale: locale)
         perform_put_with_object("/orders/#{id}?locale=#{locale}", old_order.merge(options), Epages::Order)
+      end
+
+      # implements the calls in https://developer.epages.com/apps/api-reference/patch-shops-shopid-orders-orderid.html
+      def update_order(order, options = {}, locale = 'en_GB')
+        id = epages_id(order)
+        perform_patch_with_object("/orders/#{id}?locale=#{locale}", options, Epages::Order)
       end
     end
   end

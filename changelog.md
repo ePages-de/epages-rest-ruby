@@ -7,11 +7,13 @@
     * Epages::REST::Shop#`create_customer`
     * Epages::REST::Shop#`customer`
     * Epages::REST::Shop#`update_customer`
+    * Epages::REST::Shop#`update_order`
  
  * Other changes:
  
     * shop can receive an additional boolean attribute `https` to support https and http. Default to true.  
     * renamed attribute `cancelled_on` to `rejected_on` and attribute `shipped_on` to `delivered_on` within orders
+    * renamed method `update_order` to `modify_order`. Now `update_order` will be managed by the method patch instead of put
     
 ## 1.0.4
 
