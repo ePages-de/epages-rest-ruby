@@ -11,6 +11,14 @@ describe 'Epages::REST::Orders' do
   let(:shop_customer) { shop.create_customer }
   let(:shop_customer_with_number) { shop.create_customer(customer_number: number) }
 
+  describe 'GET#customers' do
+    let(:shop_customers) { shop.customers }
+
+    it 'get an array of customers' do
+      shop_customers.each { |p| expect(p).to be_a Epages::Customer }
+    end
+  end
+
   describe 'POST#create_customer' do
     it 'get the customer' do
       expect(shop_customer).to be_a Epages::Customer

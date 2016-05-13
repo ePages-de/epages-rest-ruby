@@ -6,6 +6,14 @@ module Epages
     module Customers
       include REST::Utils
 
+      # call the API and return an array of Epages::Customer
+      # implements the call https://developer.epages.com/apps/api-reference/get-shops-shopid-customers.html
+      #
+      # @param options [Hash]
+      def customers(options = {})
+        perform_get_with_key_and_objects('/customers', options, :items, Epages::Customer)
+      end
+
       # call the API to creates a customer. If customer_number is not provided in the request, it will be generated automatically.
       # implements the call https://developer.epages.com/apps/api-reference/post-shops-shopid-customers.html
       #

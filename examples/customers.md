@@ -2,6 +2,14 @@
 
 This example assumes you have configured the `shop` correctly.
 
+## [Customers](https://developer.epages.com/apps/api-reference/get-shops-shopid-customers.html)
+
+Returns a list of customers of the shop.
+   
+```
+customers = shop.customers
+```
+
 ## [Create Customer](https://developer.epages.com/apps/api-reference/post-shops-shopid-customers.html)
 
 Creates a customer. If customerNumber is not provided in the request, it will be generated automatically. Returns an instance of Epages::Customer
