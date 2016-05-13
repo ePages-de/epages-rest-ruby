@@ -3,6 +3,7 @@ require 'epages/rest/categories'
 require 'epages/rest/customers'
 require 'epages/rest/legal'
 require 'epages/rest/miscellaneous'
+require 'epages/rest/newsletters'
 require 'epages/rest/orders'
 require 'epages/rest/products'
 require 'epages/rest/sales'
@@ -16,6 +17,7 @@ module Epages
       include REST::Customers
       include REST::Legal
       include REST::Miscellaneous
+      include REST::Newsletters
       include REST::Orders
       include REST::Products
       include REST::Sales
