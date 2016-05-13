@@ -10,7 +10,9 @@ describe 'Epages::REST::Carts' do
   let(:json_products) { JSON.parse(File.read('spec/fixtures/products.json'))['items'] }
   let(:products) { json_products.collect { |p| Epages::Product.new(Epages::Utils.symbolize_keys!(p)) } }
 
-  let(:shop_cart) { shop.create_cart }
+  let(:shop_cart) { shop.create_cart(line_items: products.shuffle.take(3).map(&:to_line_item)) }
+  let(:empty_cart) { shop.create_cart }
+  let(:address_data) { Epages::Address.new({firstName: 'Domingo', lastName: 'Cividanes', street: 'Fake Street', zipCode: 20_253, city: 'HH', country: 'GE', emailAddress: 'dcividanes91@gmail.com'}) }
 
   describe 'POST#carts' do
     it 'get the correct response' do
@@ -21,27 +23,37 @@ describe 'Epages::REST::Carts' do
       expect(shop_cart.shipping_address).to eq nil
       expect(shop_cart.line_item_container).to be_a Epages::LineItemContainer
       expect(shop_cart.line_item_container.grand_total).to be_a Epages::Price
-      expect(shop_cart.line_item_container.product_line_items).to eq []
+      shop_cart.line_item_container.product_line_items.each { |p| expect(p).to be_a Epages::ProductLineItem }
     end
   end
 
   describe 'GET#cart' do
-    let(:cart) { shop.cart(shop_cart) }
     it 'get the correct response' do
-      expect(cart).to be_a Epages::Cart
-      expect(cart.cart_id).to eq shop_cart.cart_id
-      expect(cart.checkout_url).to be_a String
+      expect(shop_cart).to be_a Epages::Cart
+      expect(shop_cart.cart_id).to eq shop_cart.cart_id
+      expect(shop_cart.checkout_url).to be_a String
+    end
+  end
+
+  describe 'POST#order_cart' do
+    let(:cart) { shop.update_cart_billing_address(shop_cart, address_data) }
+    let(:ordered_cart) { shop.order_cart(cart) }
+    it 'get the correct response' do
+      expect(ordered_cart).to be_a Epages::Order
+      expect(ordered_cart.billing_address).to be_a Epages::Address
+      expect(ordered_cart.creation_date).to be_a DateTime
+      expect(ordered_cart.line_item_container).to be_a Epages::LineItemContainer
     end
   end
 
   describe 'Changing Cart LineItems' do
-    let(:cart_with_li) { shop.cart_line_item(shop_cart, products.first) }
+    let(:cart_with_li) { shop.cart_line_item(empty_cart, products.first) }
     let(:lineitem) { cart_with_li.line_item_container.product_line_items.first }
-    let(:updated_cart) { shop.update_cart_line_item(shop_cart, lineitem, quantity: 3) }
+    let(:updated_cart) { shop.update_cart_line_item(empty_cart, lineitem, quantity: 3) }
     describe 'POST#cart_line_items' do
       it 'get the correct response' do
         expect(cart_with_li).to be_a Epages::Cart
-        expect(cart_with_li.cart_id).to eq shop_cart.cart_id
+        expect(cart_with_li.cart_id).to eq empty_cart.cart_id
         expect(cart_with_li.line_item_container.product_line_items.first.product_id).to eq products.first.product_id
       end
     end
@@ -49,7 +61,7 @@ describe 'Epages::REST::Carts' do
     describe 'PUT#update_cart_line_items' do
       it 'get the correct response' do
         expect(updated_cart).to be_a Epages::Cart
-        expect(updated_cart.cart_id).to eq shop_cart.cart_id
+        expect(updated_cart.cart_id).to eq empty_cart.cart_id
         expect(updated_cart.line_item_container.product_line_items.first.line_item_id).to eq lineitem.line_item_id
         expect(updated_cart.line_item_container.product_line_items.first.quantity[:amount]).to eq 3
       end
@@ -65,9 +77,8 @@ describe 'Epages::REST::Carts' do
   end
 
   describe 'Changing Adresses' do
-    let(:address_data) { {firstName: 'Domingo', lastName: 'Cividanes', street: 'Fake Street', zipCode: 20_253, city: 'HH', country: 'GE', emailAddress: 'dcividanes91@gmail.com'} }
-    let(:billing_cart) { shop.update_cart_billing_address(shop_cart, Epages::Address.new(address_data)) }
-    let(:shipping_cart) { shop.update_cart_shipping_address(shop_cart, Epages::Address.new(address_data)) }
+    let(:billing_cart) { shop.update_cart_billing_address(shop_cart, address_data) }
+    let(:shipping_cart) { shop.update_cart_shipping_address(shop_cart, address_data) }
     describe 'PUT#update_billing_address' do
       it 'get the correct response' do
         expect(shop_cart.billing_address).to eq nil
@@ -77,7 +88,7 @@ describe 'Epages::REST::Carts' do
     end
 
     describe 'DELETE#delete_billing_address' do
-      let(:deleted_address_cart) { shop.delete_billing_address(billing_cart) }
+      let(:deleted_address_cart) { shop.delete_cart_billing_address(billing_cart) }
       it 'get the correct response' do
         expect(billing_cart.billing_address).to be_a Epages::Address
         expect(deleted_address_cart.billing_address).to eq nil
@@ -93,7 +104,7 @@ describe 'Epages::REST::Carts' do
     end
 
     describe 'DELETE#delete_shipping_address' do
-      let(:deleted_address_cart) { shop.delete_shipping_address(shipping_cart) }
+      let(:deleted_address_cart) { shop.delete_cart_shipping_address(shipping_cart) }
       it 'get the correct response' do
         expect(shipping_cart.shipping_address).to be_a Epages::Address
         expect(deleted_address_cart.shipping_address).to eq nil

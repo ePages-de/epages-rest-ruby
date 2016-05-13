@@ -49,7 +49,7 @@ module Epages
       end
 
       # implements the call https://developer.epages.com/apps/api-reference/delete-shops-shopid-carts-cartid-billing-address.html
-      def delete_billing_address(cart)
+      def delete_cart_billing_address(cart)
         id = epages_id(cart)
         perform_delete_with_object("/carts/#{id}/billing-address", {}, Epages::Cart)
       end
@@ -62,9 +62,15 @@ module Epages
       end
 
       # implements the call https://developer.epages.com/apps/api-reference/delete-shops-shopid-carts-cartid-shipping-address.html
-      def delete_shipping_address(cart)
+      def delete_cart_shipping_address(cart)
         id = epages_id(cart)
         perform_delete_with_object("/carts/#{id}/shipping-address", {}, Epages::Cart)
+      end
+
+      # implements the call https://developer.epages.com/apps/api-reference/post-shops-shopid-carts-cartid-order.html
+      def order_cart(cart)
+        id = epages_id(cart)
+        perform_post_with_object("/carts/#{id}/order", {}, Epages::Order)
       end
     end
   end
