@@ -1,3 +1,22 @@
+## 1.0.6
+
+ * New Calls:
+    
+    * Epages::REST::Shop#`customers`
+    * Epages::REST::Shop#`create_product`
+    * Epages::REST::Shop#`watched_products`
+    * Epages::REST::Shop#`order_cart`
+    * Epages::REST::Shop#`newsletters`
+    * Epages::REST::Shop#`newsletter_subscribers`
+ 
+ * Other changes:
+    
+    * new attributes `tax_class`, `stocklevel` to Epages::Product (only for requests with a token with products_write scope)
+    * new attributes `watchers` to Epages::Product (only filled in watched_products call)
+    * removed method `modify_order`, endpoint no longer supported in the API, please use `update_order` instead
+    * removed method `product_stock_level`, endpoint no longer supported in the API, now `product` include stock level
+    * removed method `product_change_stock_level`, endpoint no longer supported in the API, please use `update_product` instead
+
 ## 1.0.5
 
  * New Calls:

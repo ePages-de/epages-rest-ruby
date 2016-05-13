@@ -36,17 +36,6 @@ describe 'Epages::REST::Orders' do
     end
   end
 
-  describe 'PUT#order' do
-    let(:address) { Epages::Address.new(first_name: 'Domingo', last_name: 'developer', street: 'Fake Street 123', zip_code: '20253', city: 'HH', country: 'DE') }
-    let(:modified_order) { shop.modify_order(orders.last.order_id, billing_address: address) }
-    it 'modifies the order' do
-      expect(modified_order).to be_a Epages::Order
-      expect(modified_order.billing_address).to be_a Epages::Address
-      expect(modified_order.billing_address.first_name).to eq 'Domingo'
-      expect(modified_order.billing_address.city).to eq 'HH'
-    end
-  end
-
   describe 'PATCH#update_customer' do
     let(:shop_order) { shop.order(order) }
     let(:note) { 'internal note' }

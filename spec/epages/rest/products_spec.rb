@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe 'Epages::REST::Products' do
   let(:token) { ENV['shop_token'] || IO.read('spec/fixtures/token.txt') }
@@ -46,6 +47,20 @@ describe 'Epages::REST::Products' do
     it 'do the request passing product_id as Epages::Product' do
       api_product = shop.product(product)
       expect(api_product).to eq product
+    end
+  end
+
+  describe 'POST#product' do
+    let(:new_product) { {name: "New product #{rand(1..10000)}", short_description: 'Awesome product',
+                         description: 'This is a description', manufacturer: 'Menufacturer',
+                         price: 5.99, search_keywords: %w(awesome product), product_number: "test-#{rand(1..10000)}"} }
+
+    it 'creating a Product' do
+      product = shop.create_product(new_product)
+      expect(product).to be_a Epages::Product
+      expect(product.name).to eq new_product[:name]
+      expect(product.product_number).to eq new_product[:product_number]
+      expect(product.short_description).to eq new_product[:short_description]
     end
   end
 
@@ -139,24 +154,18 @@ describe 'Epages::REST::Products' do
     end
   end
 
-  describe 'GET#product_stock_level' do
-    it 'get the stock level' do
-      stock_level = shop.product_stock_level(product)
-      expect(stock_level).to be_a Float
-    end
-  end
-
-  describe 'PUT#product_change_stock_level' do
-    it 'change the current stock level' do
-      stock_level = shop.product_change_stock_level(product, 1)
-      expect(stock_level).to be_a Float
-    end
-  end
-
   describe 'GET#updated_products_by_property' do
     let(:sales) { shop.updated_products_by_property(:stocklevel, changed_after: Date.today.prev_day.to_datetime.to_s) }
     it 'get the array of products' do
       sales.each { |p| expect(p).to be_a Epages::Product }
+    end
+  end
+
+  describe 'GET#watched_products' do
+    it 'get the array of watched products' do
+      watched_product = shop.watched_products.first
+      expect(watched_product).to be_a Epages::Product
+      expect(watched_product.watchers).to be_a Integer
     end
   end
 

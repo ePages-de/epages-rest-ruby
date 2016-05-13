@@ -52,12 +52,12 @@ module Epages
     # @param hash [Hash]
     def camelize_keys(hash)
       return unless hash.is_a?(Hash)
+      other = {}
       hash.keys.each do |k|
         key = k.to_s.camelize(:lower).to_sym
-        hash[key] = hash[k]
-        hash.delete(k) if key != k
+        other[key] = hash[k]
       end
-      hash
+      other
     end
 
     # return the hash with the keys converted to underscore
@@ -115,6 +115,14 @@ module Epages
     # @param string [Strimg], [Symbol]
     def camelize_words(string)
       string.to_s.gsub(/(\w+)/) { |s| s.camelize(:lower) }
+    end
+
+    # return a string that acts as a query parameters (for POST calls)
+    #
+    # @param options [Hash]
+    def to_query_options(options)
+      return '' if !options.is_a?(Hash) || options.empty?
+      "?#{options.map{ |k,v| "#{k}=#{v}" }.join('&')}"
     end
   end
 end

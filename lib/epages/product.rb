@@ -8,7 +8,8 @@ module Epages
 
     KEYS = %w(product_id name short_description description product_image images price_info for_sale special_offer delivery_weight
               shipping_methods_restricted_to availability_text availability energy_labels_string energy_label_source_file
-              product_data_sheet sf_url product_number manufacturer upc ean essential_features search_keywords links).collect(&:to_sym).freeze
+              product_data_sheet sf_url product_number manufacturer upc ean essential_features search_keywords links tax_class
+              stocklevel watchers).collect(&:to_sym).freeze
 
     attr_reader *KEYS
 
@@ -95,19 +96,6 @@ module Epages
     # returns the lowest price of all the variations of the product
     def lowest_price
       product_lowest_price(self) if link?('lowest-price')
-    end
-
-    # returns the stock level of the product
-    def stock_level
-      product_stock_level(self)[:stocklevel]
-    end
-
-    # modify the current stock level in [units]
-    #
-    # @param units [Fixnum]. Number of units to change. Can be negative
-    # @param shop [Epages::Shop]. The shop that contains the authorization to do the call
-    def change_stock_level(units, shop)
-      shop.product_change_stock_level(self, units)[:stocklevel]
     end
 
     # return a hash with productId and quantity. This format is used for the line_items of Cart

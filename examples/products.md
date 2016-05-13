@@ -19,8 +19,6 @@ Between these methods are:
  * **custom_attributes**: if the product has the link to the custom-attributes call, this method do the respective call to the API and retrieve the information.
  * **categories**: if the product has the link to the categories call, this method do the respective call to the API and retrieve the information.
  * **lowest_price**: if the product has the link to the lowest-price call, this method do the respective call to the API and retrieve the information.
- * **stock_level**: retrieves the stock level of the product from the API.
- * **change_stock_level**(quantity,shop): changes the stock level of the product in the quantity indicated as a parameter. Requires Authentication Token included in the shop`.
  * **to_line_item**(quantity): return a Hash with the product_id and the quantity. This method ease to put a product in a cart.
 
 ## [Products call](https://developer.epages.com/apps/api-reference/get-shops-shopid-products.html)
@@ -42,6 +40,21 @@ You can retrieve the information of a single product **using the id** of the pro
 ```
 using_id = shop.product("561E0DA0-91C0-4D12-79C6-D5809AB3231B")
 using_product = shop.product(products.first)
+```
+
+## [Create Product](https://developer.epages.com/apps/api-reference/get-shops-shopid-products.html)
+
+You can create a product using:
+```
+new_product = {name: "Awesome Product", short_description: 'Awesome product',description: 'This is a description', 
+               manufacturer: 'Menufacturer', price: 5.99, search_keywords: %w(awesome product), product_number: "no-12345"}
+product_created = shop.create_product(new_product)
+```
+
+You also can add a query parameter using:
+```
+sorted_products = shop.products(sort: "name")
+sort_three_products = shop.products(sort: "name", results_per_page: 3)
 ```
 
 ## [Update Product](https://developer.epages.com/apps/api-reference/patch-shops-shopid-products-productid.html)
@@ -147,26 +160,6 @@ product_categories = product.categories
 ```
 
 This call return an array of [Epages::Link] referring to the category url.
-  
-## [Product Stock](https://developer.epages.com/apps/api-reference/get-shops-shopid-products-productid-stock-level.html)
-
-This call is used to get number of units in stock of the provided product.
-```
-stock_units = shop.product_stock_level(product)
-stock = product.stock_level
-```
-
-This call return a Integer number.
-
-## [Change Product Stock](https://developer.epages.com/apps/api-reference/put-shops-shopid-products-productid-stock-level.html)
-
-This call is used to get number of units in stock of the provided product.
-```
-update_stock = shop.product_change_stock_level(product, 1)
-new_stock = product.change_stock_level(1, shop) # the token to allow you to access your shop is inside the shop variable, so you need to provide it 
-```
-
-This call return a Integer number referring to the new stock.
 
 ## [Updated products by property](https://developer.epages.com/apps/api-reference/get-shops-shopid-products-updated-productproperty.html)
 
@@ -176,6 +169,13 @@ stock_changes = shop.updated_products_by_property(:stocklevel)
 yesterday = Date.today.prev_day.to_datetime.to_s # without activesupport / rails
 yesterday = 1.day.ago.to_s # with activesupport / rails
 yesterday_stock_changes = shop.updated_products_by_property(:stocklevel, changed_after: yesterday)
+```
+
+## [Watched products](https://developer.epages.com/apps/api-reference/get-shops-shopid-watched-products.html)
+
+Returns the list of all watched products. Watched products refers to items currently out of stock and therefore can be watched by online shop customers.
+```
+watched_products = shop.watched_products
 ```
 
 

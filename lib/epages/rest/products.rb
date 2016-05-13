@@ -24,6 +24,15 @@ module Epages
         perform_get_with_object("/products/#{id}", options, Epages::Product)
       end
 
+      # call the API to create a new product wit hte data provided and return the product created as Epages::Product
+      # implements the call https://developer.epages.com/apps/api-reference/post-shops-shopid-products.html
+      #
+      # @param data [Hash]
+      # @param options [Hash]
+      def create_product(data, options = {})
+        perform_post_with_object("/products#{to_query_options(options)}", data, Epages::Product)
+      end
+
       # call the API and return a Epages::Product
       # implements the call https://developer.epages.com/apps/api-reference/patch-shops-shopid-products-productid.html
       #
@@ -124,25 +133,6 @@ module Epages
         perform_get_with_key_and_objects("/products/#{id}/categories", options, :links, Epages::Link)
       end
 
-      # call the API and return a hash that contains the stock-level
-      # implements the call https://developer.epages.com/apps/api-reference/get-shops-shopid-products-productid-stock-level.html
-      #
-      # @param product [String], [Epages::Product]
-      def product_stock_level(product)
-        id = epages_id(product)
-        perform_get_request("/products/#{id}/stock-level", {})[:stocklevel]
-      end
-
-      # call the API to modify the current stock level of the product
-      # implements the call https://developer.epages.com/apps/api-reference/get-shops-shopid-products-productid-stock-level.html
-      #
-      # @param product [String], [Epages::Product]
-      # @param units [Fixnum]
-      def product_change_stock_level(product, units)
-        id = epages_id(product)
-        perform_put_request("/products/#{id}/stock-level", changeStocklevel: units)[:stocklevel]
-      end
-
       # call the API and return an array of Epages::Product with updated attribute
       # implements the call https://developer.epages.com/apps/api-reference/get-shops-shopid-products-updated-productproperty.html
       #
@@ -159,6 +149,14 @@ module Epages
       # @param options [Hash]
       def export_products(options = {})
         perform_get_request('/products/export', options)
+      end
+
+      # call the API and returns the list of all watched products. Watched products refers to items currently out of stock and therefore can be watched by online shop customers.
+      # implements the call https://developer.epages.com/apps/api-reference/get-shops-shopid-watched-products.html
+      #
+      # @param options [Hash]
+      def watched_products(options = {})
+        perform_get_with_key_and_objects('/watched-products', options, :items, Epages::Product)
       end
     end
   end
