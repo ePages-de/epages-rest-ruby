@@ -23,6 +23,13 @@ module Epages
         options[:categoryId] = id
         perform_put_with_object("/categories/#{id}", options, Epages::Category)
       end
+
+      # implements the call https://developer.epages.com/apps/api-reference/post-shops-shopid-categories-categoryid.html
+      # The id can be from the root category or to create a subcategory
+      def create_category(object, options = {})
+        id = epages_id(object)
+        perform_post_with_object("/categories/#{id}", options, Epages::Category)
+      end
     end
   end
 end
