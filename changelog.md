@@ -30,6 +30,8 @@
     * new attribute `taxClassId`, to Epages::Cart
     * new attribute `deliveryWeight`, to Epages::ProductLineItem
     * new attribute `couponLineItem`, to Epages::LineItemContainer
+    * new class Epages::deliveryWeightQuantity
+    * new class Epages::Quantity
 
 ## 1.0.6
 
