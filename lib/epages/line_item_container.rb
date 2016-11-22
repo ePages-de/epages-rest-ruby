@@ -4,7 +4,8 @@ module Epages
   class LineItemContainer
     include Epages::Utils
 
-    KEYS = %w(grand_total total_before_tax total_tax line_items_sub_total product_line_items shipping_price coupon_line_item).collect(&:to_sym).freeze
+    KEYS = %w(grand_total total_before_tax total_tax line_items_sub_total product_line_items shipping_price
+              coupon_line_item deposits eco_participations shipping_options basket_discount).collect(&:to_sym).freeze
 
     attr_reader *KEYS
 

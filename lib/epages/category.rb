@@ -5,7 +5,7 @@ module Epages
   class Category
     include Epages::Utils
 
-    KEYS = %w(category_id name page_title description special_offer images parent sub_categories sf_url links).collect(&:to_sym).freeze
+    KEYS = %w(category_id name page_title description special_offer images parent sub_categories sf_url links visible).collect(&:to_sym).freeze
 
     attr_reader *KEYS
 

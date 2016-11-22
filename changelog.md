@@ -36,6 +36,9 @@
     * new attribute `manufacturerProductNumber`, `minStocklevel`, `productLength`,
       `productHeight`, `productWidth` `productVariationType`, and `productVariationSelection`, to Epages::Product
     * new class Epages::VariationIdentifier
+    * new attribute `status`, to Epages::PaymentData
+    * new attribute `visible`, to Epages::Category
+    * new attribute `deposits`, `ecoParticipations`, `shippingOptions` and `basketDiscount`, to Epages::LineItemContainer
 
 
 ## 1.0.6
