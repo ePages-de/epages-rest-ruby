@@ -4,7 +4,7 @@ module Epages
   class PaymentData
     include Epages::Utils
 
-    KEYS = %w(payment_method price).collect(&:to_sym).freeze
+    KEYS = %w(payment_method price status).collect(&:to_sym).freeze
 
     attr_reader *KEYS
 
