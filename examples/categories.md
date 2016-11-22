@@ -14,7 +14,7 @@ english_categories = shop.categories(locale: "en_GB")
 
 ##[Category by id](https://developer.epages.com/apps/api-reference/get-shops-shopid-categories-categoryid.html)
 
-This call retrieve a specific category using its ID or **Epages::Cartegory** instance. Returns a Epages::Category instance
+This call retrieve a specific category using its ID or **Epages::Category** instance. Returns a Epages::Category instance
 ```
 category = shop.category(category_id)
 ```

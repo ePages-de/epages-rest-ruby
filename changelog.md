@@ -6,6 +6,7 @@
 *  * Other changes:
 
    * new attribute `deliveryPeriod`, to Epages::Product
+   * new attribute `visible`, to Epages::Product
 
 ## 1.0.6
 
