@@ -1,7 +1,7 @@
 require 'epages/utils'
 
 module Epages
-  class deliveryWeightQuantity
+  class DeliveryWeightQuantity
     include Epages::Utils
 
     KEYS = %w(amount unit).collect(&:to_sym).freeze
