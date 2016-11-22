@@ -13,9 +13,8 @@ module Epages
       end
 
       # implements the call https://developer.epages.com/apps/api-reference/get-shops-shopid-tax-classes.html
-      def tax_classes(newsletter, options = {})
-        id = epages_id(newsletter)
-        perform_get_with_objects("/tax-classes/", options, :items, Epages::TaxClass)
+      def tax_classes(options = {})
+        perform_get_with_key_and_objects("/tax-classes/", options, :items, Epages::TaxClass)
       end
     end
   end
