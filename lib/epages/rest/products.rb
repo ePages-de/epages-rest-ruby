@@ -123,16 +123,6 @@ module Epages
         parse_product_lowest_price(response)
       end
 
-      # call the API and return an array of Epages::Link pointing to the categories of the product
-      # implements the call https://developer.epages.com/apps/api-reference/get-shops-shopid-products-productid-categories.html
-      #
-      # @param product [String], [Epages::Product]
-      # @param options [Hash]
-      def product_categories(product, options = {})
-        id = epages_id(product)
-        perform_get_with_key_and_objects("/products/#{id}/categories", options, :links, Epages::Link)
-      end
-
       # call the API and return an array of Epages::Product with updated attribute
       # implements the call https://developer.epages.com/apps/api-reference/get-shops-shopid-products-updated-productproperty.html
       #

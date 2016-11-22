@@ -30,6 +30,24 @@ module Epages
         id = epages_id(object)
         perform_post_with_object("/categories/#{id}", options, Epages::Category)
       end
+
+      # implements the call https://developer.epages.com/apps/api-reference/get-shops-shopid-categories-categoryid-sequence.html
+      def subcategories(object)
+        id = epages_id(object)
+        perform_get_request("/categories/#{id}/sequence")
+      end
+
+      # implements the call https://developer.epages.com/apps/api-reference/put-shops-shopid-categories-categoryid-sequence.html
+      def reorder_subcategories(object, data)
+        id = epages_id(object)
+        perform_put_request("/categories/#{id}/sequence", data)
+      end
+
+      # implements the call https://developer.epages.com/apps/api-reference/delete-shops-shopid-categories-categoryid.html
+      def delete_category(category)
+        id = epages_id(category)
+        perform_delete_request("/categories/#{id}")
+      end
     end
   end
 end

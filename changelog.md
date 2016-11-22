@@ -1,12 +1,22 @@
 ## 1.0.7
-* New Calls:
+  * New Calls:
 
-   * Epages::REST::Categories#`create_category`
+    * Epages::REST::Categories#`create_category`
+    * Epages::REST::Categories#`subcategories`
+    * Epages::REST::Categories#`reorder_subcategories`
+    * Epages::REST::Categories#`delete_category`
 
-*  * Other changes:
+  * Removed Calls:
 
-   * new attribute `deliveryPeriod`, to Epages::Product
-   * new attribute `visible`, to Epages::Product
+    * Epages::REST::Products#`product_categories`
+
+  * Other changes:
+
+    * new attribute `deliveryPeriod`, to Epages::Product
+    * new attribute `visible`, to Epages::Product
+    * new class Epages::MinimumCart for the attribute `minCartValue` on Epages::Cart
+    * new class Epages::TaxClass
+    * new attributes `partiallyDispatchedOn`, `partiallyPaidOn` and `partiallyInvoicedOn`, to Epages::Order
 
 ## 1.0.6
 
