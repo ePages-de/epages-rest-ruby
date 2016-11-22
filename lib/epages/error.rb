@@ -5,12 +5,15 @@ module Epages
     # Raised when a 4xx HTTP status code is returned
     ClientError = Class.new(self)
 
-    # HTTP status code 400, 401, 403, 404, 406, 422, 429 respectively
+    # HTTP status code 400, 401, 403, 404, 405, 406, 409, 410, 422, 429 respectively
     BadRequest =          Class.new(ClientError)
     Unauthorized =        Class.new(ClientError)
     Forbidden =           Class.new(ClientError)
     NotFound =            Class.new(ClientError)
+    MethodNotAllowed =    Class.new(ClientError)
     NotAcceptable =       Class.new(ClientError)
+    Conflict =            Class.new(ClientError)
+    Gone =                Class.new(ClientError)
     UnprocessableEntity = Class.new(ClientError)
     TooManyRequests =     Class.new(ClientError)
 
@@ -28,7 +31,10 @@ module Epages
       401 => Epages::Error::Unauthorized,
       403 => Epages::Error::Forbidden,
       404 => Epages::Error::NotFound,
+      405 => Epages::Error::MethodNotAllowed,
       406 => Epages::Error::NotAcceptable,
+      409 => Epages::Error::Conflict,
+      410 => Epages::Error::Gone,
       422 => Epages::Error::UnprocessableEntity,
       429 => Epages::Error::TooManyRequests,
       500 => Epages::Error::InternalServerError,

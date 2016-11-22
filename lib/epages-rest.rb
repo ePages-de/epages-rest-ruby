@@ -32,6 +32,7 @@ require 'epages/tax_class_info'
 require 'epages/utils'
 require 'epages/variation'
 require 'epages/variation_attribute'
+require 'epages/variation_identifier'
 require 'epages/version'
 
 require 'epages/rest/api'

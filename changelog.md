@@ -32,6 +32,11 @@
     * new attribute `couponLineItem`, to Epages::LineItemContainer
     * new class Epages::deliveryWeightQuantity
     * new class Epages::Quantity
+    * updated error codes on Epages::Error
+    * new attribute `manufacturerProductNumber`, `minStocklevel`, `productLength`,
+      `productHeight`, `productWidth` `productVariationType`, and `productVariationSelection`, to Epages::Product
+    * new class Epages::VariationIdentifier
+
 
 ## 1.0.6
 

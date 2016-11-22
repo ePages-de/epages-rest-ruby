@@ -9,7 +9,8 @@ module Epages
     KEYS = %w(product_id name short_description description product_image images price_info for_sale special_offer delivery_weight
               shipping_methods_restricted_to availability_text availability energy_labels_string energy_label_source_file
               product_data_sheet sf_url product_number manufacturer upc ean essential_features search_keywords links tax_class
-              stocklevel watchers delivery_period visible).collect(&:to_sym).freeze
+              stocklevel watchers delivery_period visible manufacturer_product_number min_stock_level product_length
+              product_height product_width product_variation_type product_variation_selection).collect(&:to_sym).freeze
 
     attr_reader *KEYS
 
