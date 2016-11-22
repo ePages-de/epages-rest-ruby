@@ -118,6 +118,12 @@ module Epages
 
       # @param path [String]
       # @param options [Hash]
+      def perform_post_request(path, options = {})
+        perform_request(:post, path, options)
+      end
+
+      # @param path [String]
+      # @param options [Hash]
       def perform_put_request(path, options = {})
         perform_request(:put, path, options)
       end

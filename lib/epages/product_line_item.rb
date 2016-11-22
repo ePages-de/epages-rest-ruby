@@ -4,7 +4,7 @@ module Epages
   class ProductLineItem
     include Epages::Utils
 
-    KEYS = %w(line_item_id sku name product_id quantity line_item_price single_item_price images links).collect(&:to_sym).freeze
+    KEYS = %w(line_item_id sku name product_id quantity line_item_price single_item_price images links delivery_weight).collect(&:to_sym).freeze
 
     attr_reader *KEYS
 

@@ -48,6 +48,18 @@ module Epages
         id = epages_id(category)
         perform_delete_request("/categories/#{id}")
       end
+
+      # implements the call https://developer.epages.com/apps/api-reference/post-shops-shopid-product-category-assignments.html
+      # Same as Epages::REST::Products#`assign_categories`
+      def assign_products(options = {})
+        perform_post_request('/product-category-assignments', options)
+      end
+
+      # implements the call https://developer.epages.com/apps/api-reference/delete-shops-shopid-product-category-assignments.html
+      # Same as Epages::REST::Products#`delete_from_categories`
+      def delete_products(options = {})
+        perform_delete_request('/product-category-assignments', options)
+      end
     end
   end
 end

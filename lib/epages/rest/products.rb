@@ -148,6 +148,18 @@ module Epages
       def watched_products(options = {})
         perform_get_with_key_and_objects('/watched-products', options, :items, Epages::Product)
       end
+
+      # implements the call https://developer.epages.com/apps/api-reference/post-shops-shopid-product-category-assignments.html
+      # Same as Epages::REST::Categories#`assign_products`
+      def assign_categories(options = {})
+        perform_post_request('/product-category-assignments', options)
+      end
+
+      # implements the call https://developer.epages.com/apps/api-reference/delete-shops-shopid-product-category-assignments.html
+      # Same as Epages::REST::Categories#`delete_products`
+      def delete_from_categories(options = {})
+        perform_delete_request('/product-category-assignments', options)
+      end
     end
   end
 end

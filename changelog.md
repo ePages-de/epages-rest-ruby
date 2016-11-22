@@ -5,6 +5,14 @@
     * Epages::REST::Categories#`subcategories`
     * Epages::REST::Categories#`reorder_subcategories`
     * Epages::REST::Categories#`delete_category`
+    * Epages::REST::Carts#`apply_coupon`
+    * Epages::REST::Carts#`delete_coupon`
+    * Epages::REST::Categories#`assign_products`
+    * Epages::REST::Categories#`delete_products`
+    * Epages::REST::Products#`assign_categories` (Same as Epages::REST::Categories#`assign_products`)
+    * Epages::REST::Products#`delete_from_categories` (Same as Epages::REST::Categories#`delete_products`)
+    * Epages::REST::TaxClasses#`tax_class`
+    * Epages::REST::TaxClasses#`tax_classes`
 
   * Removed Calls:
 
@@ -17,6 +25,11 @@
     * new class Epages::MinimumCart for the attribute `minCartValue` on Epages::Cart
     * new class Epages::TaxClass
     * new attributes `partiallyDispatchedOn`, `partiallyPaidOn` and `partiallyInvoicedOn`, to Epages::Order
+    * new class Epages::TaxClassInfo
+    * renamed attribute on Epages::Cart `minCart` to `minimumCart`
+    * new attribute `taxClassId`, to Epages::Cart
+    * new attribute `deliveryWeight`, to Epages::ProductLineItem
+    * new attribute `couponLineItem`, to Epages::LineItemContainer
 
 ## 1.0.6
 
