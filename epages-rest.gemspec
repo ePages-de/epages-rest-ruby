@@ -16,7 +16,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = %w(lib)
   spec.files         = %w(LICENSE.txt README.md epages-rest.gemspec) + Dir['lib/**/*.rb']
 
-  spec.add_development_dependency 'bundler', '~> 2.5'
+  spec.add_development_dependency 'bundler', '~> 1.13'
   spec.add_dependency 'http', '~> 2.1'
   spec.add_dependency 'activesupport', '~> 5.0'
 end
