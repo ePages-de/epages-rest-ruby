@@ -27,7 +27,9 @@ module Epages
 
       # @return [Array, Hash]
       def perform
-        response = HTTP.headers(@headers).public_send(@request_method, @uri.to_s, options_passed_by => @options)
+        response = HTTP.headers(accept: @headers['Accept'],
+                                authorization: @headers['Authorization'],
+                                content_type: @headers['Content-Type']).public_send(@request_method, @uri.to_s, options_passed_by => @options)
         fail_or_return_response_body(response)
       end
 
