@@ -10,7 +10,7 @@ module Epages
     attr_reader *KEYS
 
     def initialize(data)
-      parse_attribute_as_array_of(:sales_per_currency, data.delete(:sales_per_currency), Epages::Sales)
+      parse_attribute_as_array_of(:salesPerCurrency, data.delete(:salesPerCurrency), Epages::Sales)
       parse_attributes(data)
     end
 
