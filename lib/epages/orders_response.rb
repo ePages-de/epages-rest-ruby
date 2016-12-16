@@ -5,7 +5,7 @@ module Epages
   class OrdersResponse
     include Epages::Utils
 
-    KEYS = %w(results page resultsPerPage items).collect(&:to_sym).freeze
+    KEYS = %w(results page results_per_page items).collect(&:to_sym).freeze
 
     attr_reader *KEYS
 
