@@ -19,6 +19,25 @@ module Epages
         perform_get_with_object("/carts/#{id}", {}, Epages::Cart)
       end
 
+      # implements the call https://developer.epages.com/apps/api-reference/post-shops-shopid-carts-cartid-coupon.html
+      def apply_coupon(cart, data = {})
+        id = epages_id(cart)
+        perform_post_with_object("/carts/#{id}/coupon", data, Epages::Cart)
+      end
+
+      # implements the call https://developer.epages.com/apps/api-reference/delete-shops-shopid-carts-cartid-coupon-couponlineitemid.html
+      # It needs the couponLineItemId to be able to delete it
+      def delete_coupon(cart, coupon_line_item_id)
+        id = epages_id(cart)
+        perform_delete_with_object("/carts/#{id}/coupon/#{coupon_line_item_id}", {}, Epages::Cart)
+      end
+
+      # implements the call https://developer.epages.com/apps/api-reference/post-shops-shopid-carts-cartid-order.html
+      def order_cart(cart)
+        id = epages_id(cart)
+        perform_post_with_object("/carts/#{id}/order", {}, Epages::Order)
+      end
+
       # implements the call https://developer.epages.com/apps/api-reference/post-shops-shopid-carts-cartid-line-items.html
       def cart_line_item(cart, product, quantity = 1)
         id = epages_id(cart)
@@ -65,25 +84,6 @@ module Epages
       def delete_cart_shipping_address(cart)
         id = epages_id(cart)
         perform_delete_with_object("/carts/#{id}/shipping-address", {}, Epages::Cart)
-      end
-
-      # implements the call https://developer.epages.com/apps/api-reference/post-shops-shopid-carts-cartid-order.html
-      def order_cart(cart)
-        id = epages_id(cart)
-        perform_post_with_object("/carts/#{id}/order", {}, Epages::Order)
-      end
-
-      # implements the call https://developer.epages.com/apps/api-reference/post-shops-shopid-carts-cartid-coupon.html
-      def apply_coupon(cart, data = {})
-        id = epages_id(cart)
-        perform_post_with_object("/carts/#{id}/coupon", data, Epages::Cart)
-      end
-
-      # implements the call https://developer.epages.com/apps/api-reference/delete-shops-shopid-carts-cartid-coupon-couponlineitemid.html
-      # It needs the couponLineItemId to be able to delete it
-      def delete_coupon(cart, coupon_line_item_id)
-        id = epages_id(cart)
-        perform_delete_with_object("/carts/#{id}/coupon/#{coupon_line_item_id}", {}, Epages::Cart)
       end
     end
   end

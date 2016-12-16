@@ -10,9 +10,9 @@ module Epages
     attr_reader *KEYS
 
     def initialize(data)
-      @images = data.delete(:images).collect { |i| Epages::Image.new(i) } if data[:images]
-      @links = data.delete(:links).collect { |i| Epages::Link.new(i) } if data[:links]
-      @sub_categories = data.delete(:subCategories).collect { |i| Epages::Link.new(i) } if data[:subCategories]
+      parse_attribute_as_array_of('images', data.delete(:images), Epages::Image)
+      parse_attribute_as_array_of('links', data.delete(:links), Epages::Link)
+      parse_attribute_as_array_of('sub_categories', data.delete(:subCategories), Epages::Link)
       @parent = Epages::Link.new(data.delete(:parent)) if data[:parent]
       parse_attributes(data)
     end

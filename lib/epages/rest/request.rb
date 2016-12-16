@@ -38,6 +38,7 @@ module Epages
         headers['Content-Type']  = content_type_options unless @request_method == :multipart_post
         headers['Accept']        = '*/*'
         headers['Authorization'] = auth_token if @shop.token?
+        headers['User-Agent'] = 'ruby gem'
         headers
       end
 

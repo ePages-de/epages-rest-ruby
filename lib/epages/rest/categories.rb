@@ -17,6 +17,13 @@ module Epages
         perform_get_with_object("/categories/#{id}", options, Epages::Category)
       end
 
+      # implements the call https://developer.epages.com/apps/api-reference/post-shops-shopid-categories-categoryid.html
+      # The id can be from the root category or to create a subcategory
+      def create_category(object, options = {})
+        id = epages_id(object)
+        perform_post_with_object("/categories/#{id}", options, Epages::Category)
+      end
+
       # implements the calls in https://developer.epages.com/apps/api-reference/put-shops-shopid-categories-categoryid.html
       def update_category(object, options)
         id = epages_id(object)
@@ -24,11 +31,10 @@ module Epages
         perform_put_with_object("/categories/#{id}", options, Epages::Category)
       end
 
-      # implements the call https://developer.epages.com/apps/api-reference/post-shops-shopid-categories-categoryid.html
-      # The id can be from the root category or to create a subcategory
-      def create_category(object, options = {})
-        id = epages_id(object)
-        perform_post_with_object("/categories/#{id}", options, Epages::Category)
+      # implements the call https://developer.epages.com/apps/api-reference/delete-shops-shopid-categories-categoryid.html
+      def delete_category(category)
+        id = epages_id(category)
+        perform_delete_request("/categories/#{id}")
       end
 
       # implements the call https://developer.epages.com/apps/api-reference/get-shops-shopid-categories-categoryid-sequence.html
@@ -41,12 +47,6 @@ module Epages
       def reorder_subcategories(object, data)
         id = epages_id(object)
         perform_put_request("/categories/#{id}/sequence", data)
-      end
-
-      # implements the call https://developer.epages.com/apps/api-reference/delete-shops-shopid-categories-categoryid.html
-      def delete_category(category)
-        id = epages_id(category)
-        perform_delete_request("/categories/#{id}")
       end
 
       # implements the call https://developer.epages.com/apps/api-reference/post-shops-shopid-product-category-assignments.html

@@ -7,15 +7,10 @@ module Epages
     module Miscellaneous
       include Epages::Utils
 
-      # implements the cal https://developer.epages.com/apps/api-reference/get-shops-shopid.html
+      # implements the call https://developer.epages.com/apps/api-reference/get-shops-shopid.html
       def info(options = {})
         response = perform_get_request('/', options)
         underscorize_keys(response)
-      end
-
-      # implements the call https://developer.epages.com/apps/api-reference/get-shops-shopid-locales.html
-      def locales
-        perform_get_request('/locales', {})
       end
 
       # implements the call https://developer.epages.com/apps/api-reference/get-shops-shopid-currencies.html
@@ -23,10 +18,20 @@ module Epages
         perform_get_request('/currencies', {})
       end
 
+      # implements the call https://developer.epages.com/apps/api-reference/get-shops-shopid-locales.html
+      def locales
+        perform_get_request('/locales', {})
+      end
+
       # implements the call https://developer.epages.com/apps/api-reference/get-shops-shopid-search-product-suggest.html
       def product_suggestions_for(query, options = {})
         response = perform_get_request('/search/product-suggest', options.merge(query: query))
         parse_suggestions_to_products(response)
+      end
+
+      # implements the call https://developer.epages.com/apps/api-reference/get-shops-shopid-watched-products
+      def watched_products(options = {})
+        perform_get_request('/watched-products', {})
       end
     end
   end

@@ -11,7 +11,7 @@ module Epages
       #
       # @param options [Hash]
       def products(options = {})
-        perform_get_with_key_and_objects('/products', options, :items, Epages::Product)
+        perform_get_with_object('/products', options, Epages::ProductsResponse)
       end
 
       # call the API and return a Epages::Product

@@ -1,1 +1,42 @@
-[{"categoryId":"561E0D91-9350-F807-06A1-D5809AB32334","name":"Home page","pageTitle":"Milestones - Equipped to meet your goals","description":"Welcome to the Milestones Demo Shop All products and prices shown on these shop pages are for demonstration purposes only. They are here to illustrate the functionality of the ePages shopping system.","specialOffer":null,"images":[{"url":"https://pm.epages.com/WebRoot/Store/Shops/domingo/Categories/demoshop_root.gif","classifier":"Medium"}],"parent":null,"subCategories":[{"rel":"child","href":"http://pm.epages.com/rs/shops/domingo/categories/561E0DA7-FC6E-F2AD-3A30-D5809AB3233F","title":"Promotional products"},{"rel":"child","href":"http://pm.epages.com/rs/shops/domingo/categories/561E0DA7-BF22-D7B1-AD6C-D5809AB3235C","title":"Jackets"},{"rel":"child","href":"http://pm.epages.com/rs/shops/domingo/categories/561E0DA7-9132-B4CF-60AF-D5809AB3237E","title":"Shoes"},{"rel":"child","href":"http://pm.epages.com/rs/shops/domingo/categories/561E0DA7-FB4F-3F0C-AF0D-D5809AB323E4","title":"Backpacks"},{"rel":"child","href":"http://pm.epages.com/rs/shops/domingo/categories/561E0DA7-6508-F88D-346D-D5809AB32385","title":"Tents"},{"rel":"child","href":"http://pm.epages.com/rs/shops/domingo/categories/561E0DA8-6663-6832-DB0B-D5809AB323C0","title":"Equipment"}],"sfUrl":"http://pm.epages.com/epages/domingo.sf/?ObjectPath=/Shops/domingo/Categories","links":[{"rel":"products","href":"http://pm.epages.com/rs/shops/domingo/products?categoryId=561E0D91-9350-F807-06A1-D5809AB32334"}]}]
+[{
+    "categoryId": "561E0D91-9350-F807-06A1-D5809AB32334",
+    "name": "Home page",
+    "pageTitle": "Milestones - Equipped to meet your goals",
+    "description": "Welcome to the Milestones Demo Shop All products and prices shown on these shop pages are for demonstration purposes only. They are here to illustrate the functionality of the ePages shopping system.",
+    "specialOffer": null,
+    "images": [{
+        "url": "https://pm.epages.com/WebRoot/Store/Shops/domingo/Categories/demoshop_root.gif",
+        "classifier": "Medium"
+    }],
+    "parent": null,
+    "subCategories": [{
+        "rel": "child",
+        "href": "http://pm.epages.com/rs/shops/domingo/categories/561E0DA7-FC6E-F2AD-3A30-D5809AB3233F",
+        "title": "Promotional products"
+    }, {
+        "rel": "child",
+        "href": "http://pm.epages.com/rs/shops/domingo/categories/561E0DA7-BF22-D7B1-AD6C-D5809AB3235C",
+        "title": "Jackets"
+    }, {
+        "rel": "child",
+        "href": "http://pm.epages.com/rs/shops/domingo/categories/561E0DA7-9132-B4CF-60AF-D5809AB3237E",
+        "title": "Shoes"
+    }, {
+        "rel": "child",
+        "href": "http://pm.epages.com/rs/shops/domingo/categories/561E0DA7-FB4F-3F0C-AF0D-D5809AB323E4",
+        "title": "Backpacks"
+    }, {
+        "rel": "child",
+        "href": "http://pm.epages.com/rs/shops/domingo/categories/561E0DA7-6508-F88D-346D-D5809AB32385",
+        "title": "Tents"
+    }, {
+        "rel": "child",
+        "href": "http://pm.epages.com/rs/shops/domingo/categories/561E0DA8-6663-6832-DB0B-D5809AB323C0",
+        "title": "Equipment"
+    }],
+    "sfUrl": "http://pm.epages.com/epages/domingo.sf/?ObjectPath=/Shops/domingo/Categories",
+    "links": [{
+        "rel": "products",
+        "href": "http://pm.epages.com/rs/shops/domingo/products?categoryId=561E0D91-9350-F807-06A1-D5809AB32334"
+    }]
+}]

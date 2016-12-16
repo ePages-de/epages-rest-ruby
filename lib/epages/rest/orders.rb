@@ -8,7 +8,7 @@ module Epages
 
       # implements the calls in https://developer.epages.com/apps/api-reference/get-shops-shopid-orders.html
       def orders(options = {})
-        perform_get_with_key_and_objects('/orders', options, :items, Epages::Order)
+        perform_get_with_object('/orders', options, Epages::OrdersResponse)
       end
 
       # implements the calls in https://developer.epages.com/apps/api-reference/get-shops-shopid-orders-orderid.html

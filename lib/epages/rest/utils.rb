@@ -156,11 +156,11 @@ module Epages
 
       def parse_legal_info(data)
         {
-          contact_info: Epages::ContentPageSummary.new(data[:contactInformation]),
-          privacy_policy: Epages::ContentPageSummary.new(data[:privacyPolicy]),
-          terms_and_conditions: Epages::ContentPageSummary.new(data[:termsAndConditions]),
-          rights_of_withdrawal: Epages::ContentPageSummary.new(data[:rightsOfWithdrawal]),
-          shipping_info: Epages::ContentPageSummary.new(data[:shippingInformation]),
+          contact_info: Epages::ContentPageSummary.new(data[:contactInformation].nil? ? {'':''} : data[:contactInformation]),
+          privacy_policy: Epages::ContentPageSummary.new(data[:privacyPolicy].nil? ? {'':''} : data[:privacyPolicy]),
+          terms_and_conditions: Epages::ContentPageSummary.new(data[:termsAndConditions].nil? ? {'':''} : data[:termsAndConditions]),
+          rights_of_withdrawal: Epages::ContentPageSummary.new(data[:rightsOfWithdrawal].nil? ? {'':''} : data[:rightsOfWithdrawal]),
+          shipping_info: Epages::ContentPageSummary.new(data[:shippingInformation].nil? ? {'':''} : data[:shippingInformation]),
           links: parse_links(data[:links]),
         }
       end

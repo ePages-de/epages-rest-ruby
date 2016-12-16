@@ -1,1 +1,15 @@
-{"sizes":[{"url":"https://pm.epages.com/WebRoot/Store/Shops/domingo/Products/vs_3202112018/vs_3202112018_xs.jpg","classifier":"Thumbnail"},{"url":"https://pm.epages.com/WebRoot/Store/Shops/domingo/Products/vs_3202112018/vs_3202112018_s.jpg","classifier":"Small"},{"url":"https://pm.epages.com/WebRoot/Store/Shops/domingo/Products/vs_3202112018/vs_3202112018_m.jpg","classifier":"Medium"},{"url":"https://pm.epages.com/WebRoot/Store/Shops/domingo/Products/vs_3202112018/vs_3202112018.jpg","classifier":"Large"}]}
+{
+    "sizes": [{
+        "url": "https://pm.epages.com/WebRoot/Store/Shops/domingo/Products/vs_3202112018/vs_3202112018_xs.jpg",
+        "classifier": "Thumbnail"
+    }, {
+        "url": "https://pm.epages.com/WebRoot/Store/Shops/domingo/Products/vs_3202112018/vs_3202112018_s.jpg",
+        "classifier": "Small"
+    }, {
+        "url": "https://pm.epages.com/WebRoot/Store/Shops/domingo/Products/vs_3202112018/vs_3202112018_m.jpg",
+        "classifier": "Medium"
+    }, {
+        "url": "https://pm.epages.com/WebRoot/Store/Shops/domingo/Products/vs_3202112018/vs_3202112018.jpg",
+        "classifier": "Large"
+    }]
+}
