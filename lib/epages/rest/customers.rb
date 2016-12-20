@@ -11,7 +11,7 @@ module Epages
       #
       # @param options [Hash]
       def customers(options = {})
-        perform_get_with_key_and_objects('/customers', options, :items, Epages::Customer)
+        perform_get_with_object('/customers', options, Epages::CustomersResponse)
       end
 
       # call the API to creates a customer. If customer_number is not provided in the request, it will be generated automatically.
