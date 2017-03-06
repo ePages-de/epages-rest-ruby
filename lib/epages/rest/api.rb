@@ -9,6 +9,7 @@ require 'epages/rest/products'
 require 'epages/rest/sales'
 require 'epages/rest/shipping_methods'
 require 'epages/rest/tax_classes'
+require 'epages/rest/webhooks'
 
 module Epages
   module REST
@@ -24,6 +25,7 @@ module Epages
       include REST::Sales
       include REST::ShippingMethods
       include REST::TaxClasses
+      include REST::Webhooks
     end
   end
 end
