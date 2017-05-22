@@ -6,10 +6,6 @@ module Epages
     module Webhooks
       include REST::Utils
 
-      def webhooks(options = {})
-        perform_get_with_object("/webhooks", options, Epages::WebhookResponse)
-      end
-
       def webhook(webhook_id, options = {})
         perform_get_with_object("/webhooks/#{webhook_id}", options, Epages::Webhook)
       end
